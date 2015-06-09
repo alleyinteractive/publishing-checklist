@@ -9,8 +9,14 @@
 
 	<div class="publishing-checklist-items" style="display:none;">
 		<ul>
-			<?php foreach( $tasks as $task ) : ?>
-				<li><?php echo esc_html( $task['label'] ); ?></li>
+			<?php foreach( $tasks as $id => $task ) : ?>
+				<li>
+				<?php if ( in_array( $id, $completed_tasks ) ) : ?>
+					<span class="dashicons dashicons-yes"></span>
+				<?php else : ?>
+					<span class="dashicons dashicons-no-alt"></span>
+				<?php endif; ?>
+				<?php echo esc_html( $task['label'] ); ?></li>
 			<?php endforeach; ?>
 		</ul>
 		<a href="javascript:void(0);" class="publishing-checklist-hide-list"><?php esc_html_e( 'Hide List', 'publishing-checklist' ); ?></a>
