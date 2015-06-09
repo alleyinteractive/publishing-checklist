@@ -3,6 +3,7 @@
 
 	<div class="publishing-checklist-items-complete">
 		<?php echo esc_html( sprintf( __( '%d of %d tasks complete', 'publishing-checklist' ), count( $completed_tasks ), count( $tasks ) ) ); ?>
+		<progress value="<?php echo (int) count( $completed_tasks ); ?>" max="<?php echo (int) count( $tasks ); ?>"></progress>
 	</div>
 
 	<ul>

@@ -3,6 +3,13 @@
 	background: #f5f5f5;
 	h4 {
 		margin-top: 0;
-		margin-bottom: 0;
+		margin-bottom: 5px;
+	}
+	.publishing-checklist-items-complete {
+		font-style: italic;
+		margin-bottom: 5px;
+	}
+	progress {
+		display: block;
 	}
 }
