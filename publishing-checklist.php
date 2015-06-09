@@ -28,6 +28,7 @@ class Publishing_Checklist {
 	 * Set up actions for the plugin
 	 */
 	private function setup_actions() {
+		add_action( 'publishing_checklist_enqueue_scripts', array( $this, 'action_publishing_checklist_enqueue_scripts' ) );
 		add_action( 'post_submitbox_misc_actions', array( $this, 'action_post_submitbox_misc_actions_render_checklist' ) );
 	}
 
@@ -69,7 +70,15 @@ class Publishing_Checklist {
 			}
 		}
 
+		do_action( 'publishing_checklist_enqueue_scripts' );
 		echo $this->get_template_part( 'post-submitbox-misc-actions', array( 'tasks' => $this->tasks, 'completed_tasks' => $completed_tasks ) );
+	}
+
+	/**
+	 * Load our scripts and styles
+	 */
+	public function action_publishing_checklist_enqueue_scripts() {
+		wp_enqueue_style( 'publishing-checklist', plugins_url( 'assets/css/publishing-checklist.css', __FILE__ ) );
 	}
 
 	/**

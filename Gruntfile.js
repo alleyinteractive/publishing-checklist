@@ -36,6 +36,19 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		// Compile SASS
+		sass: {
+			options: {
+				sourceComments: false
+			},
+			compile: {
+				files: {
+					'assets/css/publishing-checklist.css' : 'assets/css/scss/publishing-checklist.scss'
+				}
+			}
+
+		},
+
 		watch: {
 			dev: {
 				files: [ '**/*.php' ],
@@ -64,6 +77,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-wp-readme-to-markdown' );
 	grunt.loadNpmTasks( 'grunt-phpcs' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
+	grunt.loadNpmTasks( 'grunt-sass' );
 	grunt.registerTask( 'i18n', ['addtextdomain', 'makepot'] );
 	grunt.registerTask( 'readme', ['wp_readme_to_markdown']);
 
