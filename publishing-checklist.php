@@ -61,7 +61,7 @@ class Publishing_Checklist {
 		}
 
 		$completed_tasks = array();
-		foreach( $this->tasks as $id => $task ) {
+		foreach ( $this->tasks as $id => $task ) {
 			if ( ! is_callable( $task['callback'] ) ) {
 				unset( $this->tasks[ $id ] );
 			}
@@ -111,7 +111,9 @@ class Publishing_Checklist {
 /**
  * Load the plugin
  */
+// @codingStandardsIgnoreStart
 function Publishing_Checklist() {
+// @codingStandardsIgnoreEnd
 	return Publishing_Checklist::get_instance();
 }
 add_action( 'init', 'Publishing_Checklist' );
