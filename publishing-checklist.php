@@ -79,6 +79,7 @@ class Publishing_Checklist {
 	 */
 	public function action_publishing_checklist_enqueue_scripts() {
 		wp_enqueue_style( 'publishing-checklist', plugins_url( 'assets/css/publishing-checklist.css', __FILE__ ) );
+		wp_enqueue_script( 'publishing-checklist', plugins_url( 'assets/js/src/publishing-checklist.js', __FILE__ ), array( 'jquery' ) );
 	}
 
 	/**
