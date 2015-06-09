@@ -9,7 +9,7 @@
 
 	<div class="publishing-checklist-items" style="display:none;">
 		<ul>
-			<?php foreach( $tasks as $id => $task ) : ?>
+			<?php foreach ( $tasks as $id => $task ) : ?>
 				<li>
 				<?php if ( in_array( $id, $completed_tasks ) ) : ?>
 					<span class="dashicons dashicons-yes"></span>

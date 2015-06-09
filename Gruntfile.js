@@ -80,6 +80,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-sass' );
 	grunt.registerTask( 'i18n', ['addtextdomain', 'makepot'] );
 	grunt.registerTask( 'readme', ['wp_readme_to_markdown']);
+	grunt.registerTask( 'default', [ 'i18n', 'readme', 'phpcs', 'sass' ] );
 
 	grunt.util.linefeed = '\n';
 
