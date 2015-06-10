@@ -10,7 +10,7 @@
 	<div class="publishing-checklist-items" style="display:none;">
 		<ul>
 			<?php foreach ( $tasks as $id => $task ) : ?>
-				<li>
+				<li title="<?php echo esc_html( $task['explanation'] ); ?>">
 				<?php if ( in_array( $id, $completed_tasks ) ) : ?>
 					<span class="dashicons dashicons-yes"></span>
 				<?php else : ?>
