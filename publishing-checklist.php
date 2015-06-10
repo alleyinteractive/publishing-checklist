@@ -90,7 +90,7 @@ class Publishing_Checklist {
 	 * @return string
 	 */
 	private function get_template_part( $template, $vars = array() ) {
-		$full_path = dirname( __FILE__ ) . '/templates/' . $template . '.php';
+		$full_path = dirname( __FILE__ ) . '/templates/' . sanitize_file_name( $template ) . '.php';
 
 		if ( ! file_exists( $full_path ) ) {
 			return '';
