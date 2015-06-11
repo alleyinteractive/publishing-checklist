@@ -46,6 +46,7 @@ class Publishing_Checklist {
 			'label'          => $id,
 			'callback'       => '__return_false',
 			'explanation'    => '',
+			'post_type'      => array(),
 			);
 		$args = array_merge( $defaults, $args );
 
@@ -56,18 +57,27 @@ class Publishing_Checklist {
 	 * Render the checklist in the publish submit box
 	 */
 	public function action_post_submitbox_misc_actions_render_checklist() {
-		if ( empty( $this->tasks ) ) {
-			return;
-		}
+
+		$post_id = get_the_ID();
+		$post_type = get_post_type( $post_id );
 
 		$completed_tasks = array();
 		foreach ( $this->tasks as $id => $task ) {
 			if ( ! is_callable( $task['callback'] ) ) {
 				unset( $this->tasks[ $id ] );
 			}
+
+			if ( ! empty( $task['post_type'] ) && ! in_array( $post_type, $task['post_type'] ) ) {
+				unset( $this->tasks[ $id ] );
+			}
+
 			if ( call_user_func_array( $task['callback'], array( get_the_ID(), $id ) ) ) {
 				$completed_tasks[] = $id;
 			}
+		}
+
+		if ( empty( $this->tasks ) ) {
+			return;
 		}
 
 		do_action( 'publishing_checklist_enqueue_scripts' );
