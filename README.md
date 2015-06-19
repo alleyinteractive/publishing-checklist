@@ -77,33 +77,6 @@ Publishing_Checklist::get_instance();
 
 ```
 
-add_action( 'demo_publishing_checklist_init', array( $this, 'action_demo_publishing_checklist_init' ) );
-
-/**
- * Initialize our Publishing Checklist rules
- */
-function action_demo_publishing_checklist_init() {
-	$post_types = array( 'post' );
-	$args = array(
-		'label'           => esc_html__( 'Featured Image', 'demo_publishing_checklist' ),
-		'callback'        => array( $this, 'validate_demo_checklist_task' ),
-		'explanation'     => esc_html__( 'A featured image is required.', 'demo_publishing_checklist' ),
-		'post_type'       => $post_types,
-		);
-	Publishing_Checklist()->register_task( 'demo-featured-image', $args );
-}
-
-/**
- * Validate a given checklist task
- */
-public function validate_demo_checklist_task( $post_id, $id ) {
-	switch ( $id ) {
-		case 'demo-featured-image':
-			return has_post_thumbnail( $post_id );
-	}
-}
-```
-
 ## Screenshots ##
 
 ## Changelog ##
