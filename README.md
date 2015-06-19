@@ -16,13 +16,7 @@ Each time a user saves a post, Publishing Checklist validates that post type's l
 ## Installation ##
 It's a plugin! Install it like any other. 
 
-Once you've done so, you'll need to register the checklist items and callbacks for your site.
-
-Here's a simple example that checks for a featured image and at least one category.
-
-
-Finally, require and initialize your new Publishing_Checklist class when loading the theme.
-
+Once you've done so, you'll need to register the checklist items and callbacks for your site. Here's a simple example that checks for a featured image.
 
 ### integrations/class-publishing-checklist.php
 ```php
