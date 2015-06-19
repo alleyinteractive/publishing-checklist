@@ -5,7 +5,7 @@ use WP_CLI;
 /**
  * Helper methods for both migration components
  */
-class Publishing_Checklist extends WPCOM_VIP_CLI_Command {
+class Publishing_Checklist extends WP_CLI_Command {
 
     /**
      * Returns editorial checklist for a given post.
