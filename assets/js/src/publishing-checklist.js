@@ -1,17 +1,15 @@
 (function($){
 
-	var showButton = $('.misc-pub-section.publishing-checklist .publishing-checklist-show-list');
-	var hideButton = $('.misc-pub-section.publishing-checklist .publishing-checklist-hide-list');
-	var checklistItems = $('.misc-pub-section.publishing-checklist .publishing-checklist-items');
-
-	showButton.on('click', function(){
-		showButton.hide();
-		checklistItems.show();
+	$(document).on('click', '.publishing-checklist-show-list', function() {
+		$( '.publishing-checklist-items', $(this).parent() ).show();
+		$(this).hide();
+		$( '.publishing-checklist-hide-list', $(this).parent() ).show();
 	});
 
-	hideButton.on('click', function(){
-		checklistItems.hide();
-		showButton.show();
+	$(document).on('click', '.publishing-checklist-hide-list', function() {
+		$( '.publishing-checklist-items', $(this).parent() ).hide();
+		$(this).hide();
+		$( '.publishing-checklist-show-list', $(this).parent() ).show();
 	});
 
 }(jQuery));

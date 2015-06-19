@@ -30,7 +30,9 @@ class Publishing_Checklist {
 	private function setup_actions() {
 		add_action( 'publishing_checklist_enqueue_scripts', array( $this, 'action_publishing_checklist_enqueue_scripts' ) );
 		add_action( 'post_submitbox_misc_actions', array( $this, 'action_post_submitbox_misc_actions_render_checklist' ) );
-	}
+		add_action( 'manage_posts_custom_column', array( $this, 'action_manage_posts_custom_column' ), 10, 2 );
+		add_filter( "manage_posts_columns", array( $this, 'filter_manage_posts_columns' ), 99 );
+}
 
 	/**
 	 * Register a validation task for our publishing checklist
@@ -116,6 +118,41 @@ class Publishing_Checklist {
 		return ob_get_clean();
 	}
 
+	/**
+	 * Customize columns on the "Manage Posts" views
+	 */
+	public function filter_manage_posts_columns( $columns ) {
+		$columns['checklist'] = esc_html__( 'Checklist', 'fusion', 'publishing-checklist' );
+		do_action( 'publishing_checklist_enqueue_scripts' );
+		return $columns;
+	}
+
+	/**
+	 * Handle the output for a custom column
+	 */
+	public function action_manage_posts_custom_column( $column_name, $post_id ) {
+		if ( 'checklist' == $column_name ) {
+			$completed_tasks = array();
+			foreach ( $this->tasks as $id => $task ) {
+				if ( ! is_callable( $task['callback'] ) ) {
+					unset( $this->tasks[ $id ] );
+				}
+
+
+				if ( call_user_func_array( $task['callback'], array( get_the_ID(), $id ) ) ) {
+					$completed_tasks[] = $id;
+				}
+			}
+
+			if ( empty( $this->tasks ) ) {
+				return;
+			}
+
+			echo $this->get_template_part( 'column-checklist', array( 'tasks' => $this->tasks, 'completed_tasks' => $completed_tasks ) );
+
+				
+			}
+		}
 }
 
 /**
