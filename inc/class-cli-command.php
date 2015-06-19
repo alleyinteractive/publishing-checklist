@@ -7,14 +7,14 @@ class Publishing_Checklist extends WP_CLI_Command {
 
 	/**
 	 * Returns editorial checklist for a given post.
-	 * 
+	 *
 	 * ## OPTIONS
-	 * 
+	 *
 	 * <id>
 	 * : The id of the post 
-	 * 
+	 *
 	 * ## EXAMPLES
-	 * 
+	 *
 	 *     wp checklist evaluate 1
 	 *
 	 * @synopsis <id>
