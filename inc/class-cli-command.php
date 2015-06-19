@@ -1,7 +1,5 @@
 <?php
 
-use WP_CLI;
-
 /**
  * Helper methods for both migration components
  */
@@ -21,7 +19,7 @@ class Publishing_Checklist extends WP_CLI_Command {
      *
      * @synopsis <id>
      */
-    function evaluate( $args, $assoc_args ) {
+    function evaluate( $args = array(), $assoc_args = array() ) {
         list( $id ) = $args;
 
         // Print a success message
