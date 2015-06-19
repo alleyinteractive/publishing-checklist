@@ -11,7 +11,7 @@ class Publishing_Checklist extends WP_CLI_Command {
 	 * ## OPTIONS
 	 *
 	 * <id>
-	 * : The id of the post 
+	 * : The id of the post
 	 *
 	 * ## EXAMPLES
 	 *
