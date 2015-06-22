@@ -20,9 +20,7 @@ class Publishing_Checklist {
 			self::$instance = new Publishing_Checklist;
 			self::$instance->setup_actions();
 			do_action( 'publishing_checklist_init' );
-
 		}
-
 		return self::$instance;
 	}
 
