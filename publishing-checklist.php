@@ -62,7 +62,8 @@ class Publishing_Checklist {
 	 * Render the checklist in the publish submit box
 	 */
 	public function action_post_submitbox_misc_actions_render_checklist() {
-		$tasks_completed = $this->checklist_evaluate();
+		$post_id = get_the_ID();
+		$tasks_completed = $this->checklist_evaluate( $post_id );
 		do_action( 'publishing_checklist_enqueue_scripts' );
 		echo $this->get_template_part( 'post-submitbox-misc-actions', array(
 			'tasks' => $tasks_completed['tasks'],
@@ -73,11 +74,7 @@ class Publishing_Checklist {
 	/**
 	* Evaluate tasks for a post
 	*/
-	public function checklist_evaluate( $post_id = null ) {
-
-		if ( empty( $post_id ) ) {
-			$post_id = get_the_ID();
-		}
+	public function evaluate_checklist( $post_id ) {
 
 		if ( empty( $post_id ) ) {
 			return false;
