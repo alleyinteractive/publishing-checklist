@@ -9,3 +9,15 @@
     margin-bottom: 5px; }
   .misc-pub-section.publishing-checklist progress {
     display: block; }
+
+@media screen and (max-width: 782px) {
+  .column-checklist {
+    display: none; } }
+.column-checklist h4 {
+  margin-top: 0;
+  margin-bottom: 5px; }
+.column-checklist .publishing-checklist-items-complete {
+  font-style: italic;
+  margin-bottom: 5px; }
+.column-checklist progress {
+  display: block; }

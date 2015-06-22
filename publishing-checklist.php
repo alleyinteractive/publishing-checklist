@@ -161,27 +161,13 @@ class Publishing_Checklist {
 	 */
 	public function action_manage_posts_custom_column( $column_name, $post_id ) {
 		if ( 'checklist' == $column_name ) {
-			$completed_tasks = array();
-			foreach ( $this->tasks as $id => $task ) {
-				if ( ! is_callable( $task['callback'] ) ) {
-					unset( $this->tasks[ $id ] );
-				}
-
-
-				if ( call_user_func_array( $task['callback'], array( get_the_ID(), $id ) ) ) {
-					$completed_tasks[] = $id;
-				}
-			}
-
-			if ( empty( $this->tasks ) ) {
-				return;
-			}
-
-			echo $this->get_template_part( 'column-checklist', array( 'tasks' => $this->tasks, 'completed_tasks' => $completed_tasks ) );
-
-				
-			}
+			$tasks_completed = $this->checklist_evaluate();
+			echo $this->get_template_part( 'column-checklist', array(
+				'tasks' => $tasks_completed['tasks'],
+				'completed_tasks' => $tasks_completed['completed'],
+			) );
 		}
+	}
 }
 
 /**
