@@ -36,8 +36,8 @@ class Publishing_Checklist {
 		add_action( 'publishing_checklist_enqueue_scripts', array( $this, 'action_publishing_checklist_enqueue_scripts' ) );
 		add_action( 'post_submitbox_misc_actions', array( $this, 'action_post_submitbox_misc_actions_render_checklist' ) );
 		add_action( 'manage_posts_custom_column', array( $this, 'action_manage_posts_custom_column' ), 10, 2 );
-		add_filter( "manage_posts_columns", array( $this, 'filter_manage_posts_columns' ), 99 );
-}
+		add_filter( 'manage_posts_columns', array( $this, 'filter_manage_posts_columns' ), 99 );
+	}
 
 	/**
 	 * Register a validation task for our publishing checklist
@@ -160,7 +160,7 @@ class Publishing_Checklist {
 	 * Handle the output for a custom column
 	 */
 	public function action_manage_posts_custom_column( $column_name, $post_id ) {
-		if ( 'checklist' == $column_name ) {
+		if ( 'checklist' === $column_name ) {
 			$tasks_completed = $this->checklist_evaluate();
 			echo $this->get_template_part( 'column-checklist', array(
 				'tasks' => $tasks_completed['tasks'],
