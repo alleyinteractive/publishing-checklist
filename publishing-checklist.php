@@ -64,12 +64,13 @@ class Publishing_Checklist {
 	public function action_post_submitbox_misc_actions_render_checklist() {
 		$post_id = get_the_ID();
 		$tasks_completed = $this->evaluate_checklist( $post_id );
-
-		do_action( 'publishing_checklist_enqueue_scripts' );
-		echo $this->get_template_part( 'post-submitbox-misc-actions', array(
+		if ( $tasks_completed ) {
+			do_action( 'publishing_checklist_enqueue_scripts' );
+			echo $this->get_template_part( 'post-submitbox-misc-actions', array(
 			'tasks' => $tasks_completed['tasks'],
 			'completed_tasks' => $tasks_completed['completed'],
-		) );
+			) );
+		}
 	}
 
 	/**
@@ -78,6 +79,10 @@ class Publishing_Checklist {
 	public function evaluate_checklist( $post_id ) {
 
 		if ( empty( $post_id ) ) {
+			return false;
+		}
+
+		if ( empty( $this->tasks ) ) {
 			return false;
 		}
 
@@ -99,7 +104,7 @@ class Publishing_Checklist {
 		}
 
 		if ( empty( $this->tasks ) ) {
-			return;
+			return false;
 		}
 
 		$checklist_data = array(
