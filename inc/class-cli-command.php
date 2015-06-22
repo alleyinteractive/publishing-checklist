@@ -27,4 +27,4 @@ class CLI_Command extends WP_CLI_Command {
 	}
 }
 
-WP_CLI::add_command( 'checklist', 'Publishing_Checklist' );
+WP_CLI::add_command( 'checklist', 'CLI_Command' );
