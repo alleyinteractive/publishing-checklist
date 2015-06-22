@@ -22,6 +22,11 @@ class CLI_Command extends WP_CLI_Command {
 	 *
 	 */
 	public function evaluate( $args = array(), $assoc_args = array() ) {
+		$defaults = array(
+			'format' => 'table',
+		);
+		$values = wp_parse_args( $assoc_args, $defaults );
+
         $fields = array(
         	'status',
         	'label',
@@ -50,7 +55,7 @@ class CLI_Command extends WP_CLI_Command {
 				endif;
 				$key++;
 			endforeach;
-    		\WP_CLI\Utils\format_items( $assoc_args['format'], $cli_evaluation, $fields );
+    		\WP_CLI\Utils\format_items( $values['format'], $cli_evaluation, $fields );
 		}
 
 	}
