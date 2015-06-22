@@ -21,9 +21,6 @@ class Publishing_Checklist {
 			self::$instance->setup_actions();
 			do_action( 'publishing_checklist_init' );
 
-			if ( defined( 'WP_CLI' ) && WP_CLI ) {
-				require_once dirname( __FILE__ ) . '/inc/class-cli-command.php';
-			}
 		}
 
 		return self::$instance;
