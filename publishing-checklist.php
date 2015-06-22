@@ -66,7 +66,7 @@ class Publishing_Checklist {
 		do_action( 'publishing_checklist_enqueue_scripts' );
 		echo $this->get_template_part( 'post-submitbox-misc-actions', array(
 			'tasks' => $tasks_completed['tasks'],
-			'completed_tasks' => $tasks_completed['completed'] 
+			'completed_tasks' => $tasks_completed['completed'],
 		) );
 	}
 
@@ -106,7 +106,7 @@ class Publishing_Checklist {
 
 		$checklist_data = array(
 			'tasks' => $this->tasks,
-			'completed' => $completed_tasks
+			'completed' => $completed_tasks,
 		);
 
 		return $checklist_data;
