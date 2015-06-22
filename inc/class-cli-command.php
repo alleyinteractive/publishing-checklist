@@ -2,7 +2,7 @@
 use \WP_CLI\Utils;
 
 /**
- * Based on:
+ * Based on: https://github.com/wp-cli/wp-cli/wiki/Commands-Cookbook
  */
 class CLI_Command extends WP_CLI_Command {
 
