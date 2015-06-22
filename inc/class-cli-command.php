@@ -32,7 +32,7 @@ class CLI_Command extends WP_CLI_Command {
 			'label',
 			'explanation',
 		);
-		foreach( $args as $id ) {
+		foreach ( $args as $id ) {
 			$checklist_data = Publishing_Checklist()->evaluate_checklist( $id );
 
 			if ( empty( $checklist_data ) ) {
@@ -47,7 +47,7 @@ class CLI_Command extends WP_CLI_Command {
 				if ( in_array( $id, $checklist_data['completed'] ) ) :
 					$cli_evaluation[ $key ]['status'] = '+';
 					$cli_evaluation[ $key ]['label'] = $task['label'];
-					$cli_evaluation[ $key ][ 'explanation'] = $task['explanation'];
+					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
 				else :
 					$cli_evaluation[ $key ]['status'] = '-';
 					$cli_evaluation[ $key ]['label'] = $task['label'];
