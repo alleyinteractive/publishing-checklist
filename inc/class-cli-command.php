@@ -37,6 +37,7 @@ class CLI_Command extends WP_CLI_Command {
 
 			if ( empty( $checklist_data ) ) {
 				WP_CLI::error( sprintf( __( 'No checklist found for %d.', 'publishing-checklist' ), $id ) );;
+				break;
 			}
 
 			WP_CLI::success( sprintf( __( '%d of %d tasks complete for %d', 'publishing-checklist' ), count( $checklist_data['completed'] ), count( $checklist_data['tasks'] ), $id ) );
