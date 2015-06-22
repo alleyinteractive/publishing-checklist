@@ -62,8 +62,27 @@ class Publishing_Checklist {
 	 * Render the checklist in the publish submit box
 	 */
 	public function action_post_submitbox_misc_actions_render_checklist() {
+		$tasks_completed = $this->checklist_evaluate();
+		do_action( 'publishing_checklist_enqueue_scripts' );
+		echo $this->get_template_part( 'post-submitbox-misc-actions', array(
+			'tasks' => $tasks_completed['tasks'],
+			'completed_tasks' => $tasks_completed['completed'] 
+		) );
+	}
 
-		$post_id = get_the_ID();
+	/**
+	* Evaluate tasks for a post
+	*/
+	public function checklist_evaluate( $post_id = null ) {
+
+		if ( empty( $post_id ) ) {
+			$post_id = get_the_ID();
+		}
+
+		if ( empty( $post_id ) ) {
+			return false;
+		}
+
 		$post_type = get_post_type( $post_id );
 
 		$completed_tasks = array();
@@ -76,7 +95,7 @@ class Publishing_Checklist {
 				unset( $this->tasks[ $id ] );
 			}
 
-			if ( call_user_func_array( $task['callback'], array( get_the_ID(), $id ) ) ) {
+			if ( call_user_func_array( $task['callback'], array( $post_id, $id ) ) ) {
 				$completed_tasks[] = $id;
 			}
 		}
@@ -85,8 +104,13 @@ class Publishing_Checklist {
 			return;
 		}
 
-		do_action( 'publishing_checklist_enqueue_scripts' );
-		echo $this->get_template_part( 'post-submitbox-misc-actions', array( 'tasks' => $this->tasks, 'completed_tasks' => $completed_tasks ) );
+		$checklist_data = array(
+			'tasks' => $this->tasks,
+			'completed' => $completed_tasks
+		);
+
+		return $checklist_data;
+
 	}
 
 	/**
@@ -104,7 +128,7 @@ class Publishing_Checklist {
 	 * @param array $vars
 	 * @return string
 	 */
-	private function get_template_part( $template, $vars = array() ) {
+	public function get_template_part( $template, $vars = array() ) {
 		$full_path = dirname( __FILE__ ) . '/templates/' . sanitize_file_name( $template ) . '.php';
 
 		if ( ! file_exists( $full_path ) ) {

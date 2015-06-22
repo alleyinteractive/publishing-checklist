@@ -4,7 +4,6 @@
  * Helper methods for both migration components
  */
 class CLI_Command extends WP_CLI_Command {
-
 	/**
 	 * Returns editorial checklist for a given post.
 	 *
@@ -21,9 +20,18 @@ class CLI_Command extends WP_CLI_Command {
 	 */
 	function evaluate( $args = array(), $assoc_args = array() ) {
 		list( $id ) = $args;
-
-		// Print a success message
-		WP_CLI::success( "Evaluated $id" );
+		$checklist_data = Publishing_Checklist()->checklist_evaluate( $id );
+		if ( $checklist_data == false ) {
+			WP_CLI::error('No checklist found.');
+		}
+		WP_CLI::success( sprintf( __( '%d of %d tasks complete', 'publishing-checklist' ), count( $checklist_data['tasks'] ), count( $checklist_data['completed'] ) ) );
+		foreach ( $checklist_data['tasks'] as $id => $task ) :
+			if ( in_array( $id, $checklist_data['completed'] ) ) :
+				WP_CLI::line( '+ ' .  $task['explanation'] );
+			 else : 
+				WP_CLI::line(  '- ' .  $task['explanation'] );
+			endif;
+		endforeach; 
 	}
 }
 
