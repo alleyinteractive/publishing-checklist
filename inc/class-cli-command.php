@@ -4,6 +4,7 @@
  * Helper methods for both migration components
  */
 class CLI_Command extends WP_CLI_Command {
+
 	/**
 	 * Returns editorial checklist for a given post.
 	 *
