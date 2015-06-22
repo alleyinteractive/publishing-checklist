@@ -2,7 +2,7 @@
 use \WP_CLI\Utils;
 
 /**
- * Based on: 
+ * Based on:
  */
 class CLI_Command extends WP_CLI_Command {
 
@@ -18,7 +18,7 @@ class CLI_Command extends WP_CLI_Command {
 	 * : Accepted values: table, json, csv. Default: table
 	 * ## EXAMPLES
 	 *
-	 *     wp checklist evaluate 1
+	 * wp checklist evaluate 1
 	 *
 	 */
 	public function evaluate( $args = array(), $assoc_args = array() ) {
@@ -45,13 +45,13 @@ class CLI_Command extends WP_CLI_Command {
 			$cli_evaluation = array();
 			foreach ( $checklist_data['tasks'] as $id => $task ) :
 				if ( in_array( $id, $checklist_data['completed'] ) ) :
-					$cli_evaluation[ $key ][ 'status' ] = '+';
-					$cli_evaluation[ $key ][ 'label' ] =  $task['label'];
-					$cli_evaluation[ $key ][ 'explanation' ] =  $task['explanation'];
+					$cli_evaluation[ $key ]['status'] = '+';
+					$cli_evaluation[ $key ]['label'] = $task['label'];
+					$cli_evaluation[ $key ][ 'explanation'] = $task['explanation'];
 				else :
-					$cli_evaluation[ $key ][ 'status' ] = '-';
-					$cli_evaluation[ $key ][ 'label' ] =  $task['label'];
-					$cli_evaluation[ $key ][ 'explanation' ] =  $task['explanation'];
+					$cli_evaluation[ $key ]['status'] = '-';
+					$cli_evaluation[ $key ]['label'] = $task['label'];
+					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
 				endif;
 				$key++;
 			endforeach;
