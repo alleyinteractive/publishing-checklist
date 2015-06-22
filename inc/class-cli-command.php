@@ -3,7 +3,7 @@
 /**
  * Helper methods for both migration components
  */
-class Publishing_Checklist extends WP_CLI_Command {
+class CLI_Command extends WP_CLI_Command {
 
 	/**
 	 * Returns editorial checklist for a given post.
