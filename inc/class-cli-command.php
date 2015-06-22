@@ -20,7 +20,7 @@ class CLI_Command extends WP_CLI_Command {
 	 */
 	function evaluate( $args = array(), $assoc_args = array() ) {
 		list( $id ) = $args;
-		$checklist_data = Publishing_Checklist()->checklist_evaluate( $id );
+		$checklist_data = Publishing_Checklist()->evaluate_checklist( $id );
 		if ( empty( $checklist_data ) ) {
 			WP_CLI::error( 'No checklist found.' );
 		}
