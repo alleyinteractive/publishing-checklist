@@ -27,11 +27,11 @@ class CLI_Command extends WP_CLI_Command {
 		);
 		$values = wp_parse_args( $assoc_args, $defaults );
 
-        $fields = array(
-        	'status',
-        	'label',
-        	'explanation',
-        );
+		$fields = array(
+			'status',
+			'label',
+			'explanation',
+		);
 		foreach( $args as $id ) {
 			$checklist_data = Publishing_Checklist()->evaluate_checklist( $id );
 
@@ -55,7 +55,7 @@ class CLI_Command extends WP_CLI_Command {
 				endif;
 				$key++;
 			endforeach;
-    		\WP_CLI\Utils\format_items( $values['format'], $cli_evaluation, $fields );
+			\WP_CLI\Utils\format_items( $values['format'], $cli_evaluation, $fields );
 		}
 
 	}
