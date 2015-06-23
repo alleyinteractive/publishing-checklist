@@ -4,7 +4,6 @@ namespace Publishing_Checklist;
 
 /**
 * CLI interface to the Publishing Checklist.
-* Based on: https://github.com/wp-cli/wp-cli/wiki/Commands-Cookbook
  */
 class CLI_Command extends WP_CLI_Command {
 
