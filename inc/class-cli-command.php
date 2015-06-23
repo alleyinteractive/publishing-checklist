@@ -14,7 +14,7 @@ class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 	 * : The ID of one or more posts
 	 *
 	 * [--format=<format>]
-	 * : Accepted values: table, json, csv. Default: table
+	 * : Accepted values: table, json, csv, summary. Default: table
 	 *
 	 * ## EXAMPLES
 	 *
@@ -39,12 +39,12 @@ class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 
 			$checklist_data = Publishing_Checklist()->evaluate_checklist( $post_id );
 
-			if ( empty( $checklist_data ) && ( $values['format'] !== 'json' ) ) {
+			if ( empty( $checklist_data ) && ( $values['format'] === 'summary' ) ) {
 				WP_CLI::error( sprintf( __( 'No checklist found for %d.', 'publishing-checklist' ), $post_id ) );;
 				break;
 			}
 
-			if ( $values['format'] !== 'json' ) {
+			if ( $values['format'] === 'summary' ) {
 				WP_CLI::success( sprintf( __( '%d of %d tasks complete for %d', 'publishing-checklist' ), count( $checklist_data['completed'] ), count( $checklist_data['tasks'] ), $post_id ) );
 			}
 			foreach ( $checklist_data['tasks'] as $id => $task ) {
@@ -57,9 +57,9 @@ class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 				);
 			}
 		}
-
-		\WP_CLI\Utils\format_items( $values['format'], $cli_evaluation, $fields );
-
+		if ( $values['format'] !== 'summary' ){
+			\WP_CLI\Utils\format_items( $values['format'], $cli_evaluation, $fields );
+		}
 	}
 }
 
