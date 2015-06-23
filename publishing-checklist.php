@@ -66,10 +66,12 @@ class Publishing_Checklist {
 		$tasks_completed = $this->evaluate_checklist( $post_id );
 		if ( $tasks_completed ) {
 			do_action( 'publishing_checklist_enqueue_scripts' );
-			echo $this->get_template_part( 'post-submitbox-misc-actions', array(
-				'tasks' => $tasks_completed['tasks'],
-				'completed_tasks' => $tasks_completed['completed'],
-			) );
+			echo $this->get_template_part( 'post-submitbox-misc-actions',
+				array(
+					'tasks' => $tasks_completed['tasks'],
+					'completed_tasks' => $tasks_completed['completed'],
+				) 
+			);
 		}
 	}
 

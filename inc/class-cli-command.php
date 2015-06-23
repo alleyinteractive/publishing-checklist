@@ -1,13 +1,14 @@
 <?php
-use \WP_CLI\Utils;
+namespace Publishing_Checklist;
 
 /**
- * Based on: https://github.com/wp-cli/wp-cli/wiki/Commands-Cookbook
+* CLI interface to the Publishing Checklist.
+* Based on: https://github.com/wp-cli/wp-cli/wiki/Commands-Cookbook
  */
 class CLI_Command extends WP_CLI_Command {
 
 	/**
-	 * Returns editorial checklist for a given post.
+	 * Evaluates publishing checklist for one or more posts.
 	 *
 	 * ## OPTIONS
 	 *
@@ -16,9 +17,10 @@ class CLI_Command extends WP_CLI_Command {
 	 *
 	 * [--format=<format>]
 	 * : Accepted values: table, json, csv. Default: table
+	 *
 	 * ## EXAMPLES
 	 *
-	 * wp checklist evaluate 1
+	 * 	wp checklist evaluate 1
 	 *
 	 */
 	public function evaluate( $args = array(), $assoc_args = array() ) {
@@ -44,7 +46,7 @@ class CLI_Command extends WP_CLI_Command {
 
 			$key = $id;
 			$cli_evaluation = array();
-			foreach ( $checklist_data['tasks'] as $id => $task ) :
+			foreach ( $checklist_data['tasks'] as $id => $task ) {
 				if ( in_array( $id, $checklist_data['completed'] ) ) :
 					$cli_evaluation[ $key ]['status'] = '+';
 					$cli_evaluation[ $key ]['label'] = $task['label'];
@@ -55,11 +57,11 @@ class CLI_Command extends WP_CLI_Command {
 					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
 				endif;
 				$key++;
-			endforeach;
+			}
 			\WP_CLI\Utils\format_items( $values['format'], $cli_evaluation, $fields );
 		}
 
 	}
 }
 
-WP_CLI::add_command( 'checklist', 'CLI_Command' );
+WP_CLI::add_command( 'checklist', 'Publishing_Checklist\CLI_Command' );
