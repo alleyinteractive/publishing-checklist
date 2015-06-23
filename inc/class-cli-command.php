@@ -48,19 +48,19 @@ class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 			WP_CLI::success( sprintf( __( '%d of %d tasks complete for %d', 'publishing-checklist' ), count( $checklist_data['completed'] ), count( $checklist_data['tasks'] ), $post_id ) );
 
 			foreach ( $checklist_data['tasks'] as $id => $task ) {
-				if ( in_array( $id, $checklist_data['completed'] ) ) :
+				if ( in_array( $id, $checklist_data['completed'] ) ) {
 					$cli_evaluation[ $key ]['id'] = $post_id;
 					$cli_evaluation[ $key ]['task_id'] = $id;
 					$cli_evaluation[ $key ]['status'] = '+';
 					$cli_evaluation[ $key ]['label'] = $task['label'];
 					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
-				else :
+				} else {
 					$cli_evaluation[ $key ]['id'] = $post_id;
 					$cli_evaluation[ $key ]['task_id'] = $id;
 					$cli_evaluation[ $key ]['status'] = '-';
 					$cli_evaluation[ $key ]['label'] = $task['label'];
 					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
-				endif;
+				}
 				$key++;
 			}
 		}
