@@ -2,10 +2,10 @@
 /*
 Plugin Name: Publishing Checklist
 Version: 0.1-alpha
-Description: PLUGIN DESCRIPTION HERE
+Description: Set and use pre-flight publishing checklists for your different post types.
 Author: Fusion Engineering
 Author URI: http://fusion.net/
-Plugin URI: PLUGIN SITE HERE
+Plugin URI: https://github.com/fusioneng/publishing-checklist
 Text Domain: publishing-checklist
 Domain Path: /languages
 */
@@ -20,7 +20,12 @@ class Publishing_Checklist {
 			self::$instance = new Publishing_Checklist;
 			self::$instance->setup_actions();
 			do_action( 'publishing_checklist_init' );
+
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				require_once dirname( __FILE__ ) . '/inc/class-cli-command.php';
+			}
 		}
+
 		return self::$instance;
 	}
 
@@ -57,31 +62,63 @@ class Publishing_Checklist {
 	 * Render the checklist in the publish submit box
 	 */
 	public function action_post_submitbox_misc_actions_render_checklist() {
-
 		$post_id = get_the_ID();
+		$tasks_completed = $this->evaluate_checklist( $post_id );
+		if ( $tasks_completed ) {
+			do_action( 'publishing_checklist_enqueue_scripts' );
+			echo $this->get_template_part( 'post-submitbox-misc-actions',
+				array(
+					'tasks' => $tasks_completed['tasks'],
+					'completed_tasks' => $tasks_completed['completed'],
+				)
+			);
+		}
+	}
+
+	/**
+	* Evaluate tasks for a post
+	*
+	* @param string $post_id WordPress post ID
+	*
+	*/
+	public function evaluate_checklist( $post_id ) {
+
+		if ( empty( $post_id ) ) {
+			return false;
+		}
+
+		if ( empty( $this->tasks ) ) {
+			return false;
+		}
+
 		$post_type = get_post_type( $post_id );
 
 		$completed_tasks = array();
-		foreach ( $this->tasks as $id => $task ) {
+		foreach ( $this->tasks as $task_id => $task ) {
 			if ( ! is_callable( $task['callback'] ) ) {
-				unset( $this->tasks[ $id ] );
+				unset( $this->tasks[ $task_id ] );
 			}
 
 			if ( ! empty( $task['post_type'] ) && ! in_array( $post_type, $task['post_type'] ) ) {
-				unset( $this->tasks[ $id ] );
+				unset( $this->tasks[ $task_id ] );
 			}
 
-			if ( call_user_func_array( $task['callback'], array( get_the_ID(), $id ) ) ) {
-				$completed_tasks[] = $id;
+			if ( call_user_func_array( $task['callback'], array( $post_id, $task_id ) ) ) {
+				$completed_tasks[] = $task_id;
 			}
 		}
 
 		if ( empty( $this->tasks ) ) {
-			return;
+			return false;
 		}
 
-		do_action( 'publishing_checklist_enqueue_scripts' );
-		echo $this->get_template_part( 'post-submitbox-misc-actions', array( 'tasks' => $this->tasks, 'completed_tasks' => $completed_tasks ) );
+		$checklist_data = array(
+			'tasks' => $this->tasks,
+			'completed' => $completed_tasks,
+		);
+
+		return $checklist_data;
+
 	}
 
 	/**
