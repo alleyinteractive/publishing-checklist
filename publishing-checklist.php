@@ -70,7 +70,7 @@ class Publishing_Checklist {
 				array(
 					'tasks' => $tasks_completed['tasks'],
 					'completed_tasks' => $tasks_completed['completed'],
-				) 
+				)
 			);
 		}
 	}
