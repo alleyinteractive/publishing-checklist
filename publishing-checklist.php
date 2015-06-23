@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Publishing Checklist
-Version: 0.1-alpha
-Description: PLUGIN DESCRIPTION HERE
+Version: 0.1.0
+Description: Set and use pre-flight publishing checklists for your different post types.
 Author: Fusion Engineering
 Author URI: http://fusion.net/
-Plugin URI: PLUGIN SITE HERE
+Plugin URI: https://github.com/fusioneng/publishing-checklist
 Text Domain: publishing-checklist
 Domain Path: /languages
 */
@@ -59,24 +59,32 @@ class Publishing_Checklist {
 	 * Render the checklist in the publish submit box
 	 */
 	public function action_post_submitbox_misc_actions_render_checklist() {
-		$tasks_completed = $this->checklist_evaluate();
-		do_action( 'publishing_checklist_enqueue_scripts' );
-		echo $this->get_template_part( 'post-submitbox-misc-actions', array(
-			'tasks' => $tasks_completed['tasks'],
-			'completed_tasks' => $tasks_completed['completed'],
-		) );
+		$post_id = get_the_ID();
+		$tasks_completed = $this->evaluate_checklist( $post_id );
+		if ( $tasks_completed ) {
+			do_action( 'publishing_checklist_enqueue_scripts' );
+			echo $this->get_template_part( 'post-submitbox-misc-actions',
+				array(
+					'tasks' => $tasks_completed['tasks'],
+					'completed_tasks' => $tasks_completed['completed'],
+				)
+			);
+		}
 	}
 
 	/**
 	* Evaluate tasks for a post
+	*
+	* @param string $post_id WordPress post ID
+	*
 	*/
-	public function checklist_evaluate( $post_id = null ) {
+	public function evaluate_checklist( $post_id ) {
 
 		if ( empty( $post_id ) ) {
-			$post_id = get_the_ID();
+			return false;
 		}
 
-		if ( empty( $post_id ) ) {
+		if ( empty( $this->tasks ) ) {
 			return false;
 		}
 
@@ -98,7 +106,7 @@ class Publishing_Checklist {
 		}
 
 		if ( empty( $this->tasks ) ) {
-			return;
+			return false;
 		}
 
 		$checklist_data = array(
@@ -125,7 +133,7 @@ class Publishing_Checklist {
 	 * @param array $vars
 	 * @return string
 	 */
-	public function get_template_part( $template, $vars = array() ) {
+	private function get_template_part( $template, $vars = array() ) {
 		$full_path = dirname( __FILE__ ) . '/templates/' . sanitize_file_name( $template ) . '.php';
 
 		if ( ! file_exists( $full_path ) ) {
