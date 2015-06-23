@@ -1,9 +1,14 @@
 <?php
 
+namespace Publishing_Checklist;
+
+use WP_CLI;
+use WP_CLI_Command;
+
 /**
 * CLI interface to the Publishing Checklist.
  */
-class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
+class CLI_Command extends WP_CLI_Command {
 
 	/**
 	 * Evaluates publishing checklist for one or more posts.
@@ -64,4 +69,4 @@ class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 	}
 }
 
-WP_CLI::add_command( 'checklist', 'Evaluate_Checklist_CLI_Command' );
+WP_CLI::add_command( 'publishing-checklist', 'Publishing_Checklist\CLI_Command' );
