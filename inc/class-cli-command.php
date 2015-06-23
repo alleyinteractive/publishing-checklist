@@ -35,7 +35,6 @@ class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 			'explanation',
 		);
 		$cli_evaluation = array();
-		$key = 0;
 		foreach ( $args as $post_id ) {
 
 			$checklist_data = Publishing_Checklist()->evaluate_checklist( $post_id );
@@ -49,20 +48,13 @@ class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 				WP_CLI::success( sprintf( __( '%d of %d tasks complete for %d', 'publishing-checklist' ), count( $checklist_data['completed'] ), count( $checklist_data['tasks'] ), $post_id ) );
 			}
 			foreach ( $checklist_data['tasks'] as $id => $task ) {
-				if ( in_array( $id, $checklist_data['completed'] ) ) {
-					$cli_evaluation[ $key ]['post_id'] = $post_id;
-					$cli_evaluation[ $key ]['task_id'] = $id;
-					$cli_evaluation[ $key ]['status'] = '+';
-					$cli_evaluation[ $key ]['label'] = $task['label'];
-					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
-				} else {
-					$cli_evaluation[ $key ]['post_id'] = $post_id;
-					$cli_evaluation[ $key ]['task_id'] = $id;
-					$cli_evaluation[ $key ]['status'] = '-';
-					$cli_evaluation[ $key ]['label'] = $task['label'];
-					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
-				}
-				$key++;
+				$cli_evaluation[] = array(
+					'task_id'     => $id,
+					'post_id'     => $post_id,
+					'status'      => in_array( $id, $checklist_data['completed'] ) ? 'complete' : 'incomplete',
+					'label'       => $task['label'],
+					'explanation' => $task['explanation'],
+				);
 			}
 		}
 
