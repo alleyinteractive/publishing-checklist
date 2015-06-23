@@ -1,6 +1,6 @@
 <?php
 
-public function ensure_minimum_200_words( $post_id, $id ) {
+function ensure_minimum_200_words( $post_id, $id ) {
 
 	$obj = get_post( $post_id );
 

@@ -1,7 +1,5 @@
 <?php
 
-namespace Publishing_Checklist;
-
 /**
 * CLI interface to the Publishing Checklist.
  */
@@ -34,6 +32,7 @@ class CLI_Command extends WP_CLI_Command {
 			'label',
 			'explanation',
 		);
+		$cli_evaluation = array();
 		foreach ( $args as $id ) {
 			$checklist_data = Publishing_Checklist()->evaluate_checklist( $id );
 
@@ -44,17 +43,17 @@ class CLI_Command extends WP_CLI_Command {
 
 			WP_CLI::success( sprintf( __( '%d of %d tasks complete for %d', 'publishing-checklist' ), count( $checklist_data['completed'] ), count( $checklist_data['tasks'] ), $id ) );
 
-			$key = $id;
-			$cli_evaluation = array();
+			$key = 0;
+			
 			foreach ( $checklist_data['tasks'] as $id => $task ) {
 				if ( in_array( $id, $checklist_data['completed'] ) ) :
-					$cli_evaluation[ $key ]['status'] = '+';
-					$cli_evaluation[ $key ]['label'] = $task['label'];
+					$cli_evaluation[ $id ][ $key ]['status'] = '+';
+					$cli_evaluation[ $id ][ $key ]['label'] = $task['label'];
 					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
 				else :
-					$cli_evaluation[ $key ]['status'] = '-';
-					$cli_evaluation[ $key ]['label'] = $task['label'];
-					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
+					$cli_evaluation[ $id ][ $key ]['status'] = '-';
+					$cli_evaluation[ $id ][ $key ]['label'] = $task['label'];
+					$cli_evaluation[ $id ][ $key ]['explanation'] = $task['explanation'];
 				endif;
 				$key++;
 			}
@@ -64,4 +63,4 @@ class CLI_Command extends WP_CLI_Command {
 	}
 }
 
-WP_CLI::add_command( 'checklist', 'Publishing_Checklist\CLI_Command' );
+WP_CLI::add_command( 'checklist', 'CLI_Command' );
