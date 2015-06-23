@@ -40,7 +40,7 @@ class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 			$checklist_data = Publishing_Checklist()->evaluate_checklist( $post_id );
 
 			if ( empty( $checklist_data ) &&  'summary' === $values['format'] ) {
-				WP_CLI::error( sprintf( __( 'No checklist found for %d.', 'publishing-checklist' ), $post_id ) );;
+				WP_CLI::warning( sprintf( __( 'No checklist found for %d.', 'publishing-checklist' ), $post_id ) );;
 				break;
 			}
 
