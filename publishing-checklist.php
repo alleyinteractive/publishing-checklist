@@ -94,17 +94,17 @@ class Publishing_Checklist {
 		$post_type = get_post_type( $post_id );
 
 		$completed_tasks = array();
-		foreach ( $this->tasks as $id => $task ) {
+		foreach ( $this->tasks as $task_id => $task ) {
 			if ( ! is_callable( $task['callback'] ) ) {
-				unset( $this->tasks[ $id ] );
+				unset( $this->tasks[ $task_id ] );
 			}
 
 			if ( ! empty( $task['post_type'] ) && ! in_array( $post_type, $task['post_type'] ) ) {
-				unset( $this->tasks[ $id ] );
+				unset( $this->tasks[ $task_id ] );
 			}
 
-			if ( call_user_func_array( $task['callback'], array( $post_id, $id ) ) ) {
-				$completed_tasks[] = $id;
+			if ( call_user_func_array( $task['callback'], array( $post_id, $task_id ) ) ) {
+				$completed_tasks[] = $task_id;
 			}
 		}
 
