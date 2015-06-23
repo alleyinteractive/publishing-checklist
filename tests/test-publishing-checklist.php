@@ -38,8 +38,8 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 	public function test_complete_evaluate_checklist() {
 		$post_id = $this->factory->post->create(
 			array(
-				'post_content' => $this->long_test
-			) 
+				'post_content' => $this->long_test,
+			)
 		);
 		$evaluated = Publishing_Checklist()->evaluate_checklist( $post_id );
 		$this->assertContains( 'Word Count', $evaluated['tasks']['test-publishing-checklist-word-count']['label'] );
