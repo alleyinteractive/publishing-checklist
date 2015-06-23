@@ -3,7 +3,7 @@
 /**
 * CLI interface to the Publishing Checklist.
  */
-class CLI_Command extends WP_CLI_Command {
+class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 
 	/**
 	 * Evaluates publishing checklist for one or more posts.
@@ -28,39 +28,41 @@ class CLI_Command extends WP_CLI_Command {
 		$values = wp_parse_args( $assoc_args, $defaults );
 
 		$fields = array(
+			'id',
 			'status',
 			'label',
 			'explanation',
 		);
 		$cli_evaluation = array();
-		foreach ( $args as $id ) {
-			$checklist_data = Publishing_Checklist()->evaluate_checklist( $id );
+		foreach ( $args as $post_id ) {
+			$checklist_data = Publishing_Checklist()->evaluate_checklist( $post_id );
 
 			if ( empty( $checklist_data ) ) {
-				WP_CLI::error( sprintf( __( 'No checklist found for %d.', 'publishing-checklist' ), $id ) );;
+				WP_CLI::error( sprintf( __( 'No checklist found for %d.', 'publishing-checklist' ), $post_id ) );;
 				break;
 			}
 
-			WP_CLI::success( sprintf( __( '%d of %d tasks complete for %d', 'publishing-checklist' ), count( $checklist_data['completed'] ), count( $checklist_data['tasks'] ), $id ) );
-
+			WP_CLI::success( sprintf( __( '%d of %d tasks complete for %d', 'publishing-checklist' ), count( $checklist_data['completed'] ), count( $checklist_data['tasks'] ), $post_id ) );
 			$key = 0;
-			
 			foreach ( $checklist_data['tasks'] as $id => $task ) {
 				if ( in_array( $id, $checklist_data['completed'] ) ) :
-					$cli_evaluation[ $id ][ $key ]['status'] = '+';
-					$cli_evaluation[ $id ][ $key ]['label'] = $task['label'];
+					$cli_evaluation[ $key ]['id'] = $post_id;
+					$cli_evaluation[ $key ]['status'] = '+';
+					$cli_evaluation[ $key ]['label'] = $task['label'];
 					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
 				else :
-					$cli_evaluation[ $id ][ $key ]['status'] = '-';
-					$cli_evaluation[ $id ][ $key ]['label'] = $task['label'];
-					$cli_evaluation[ $id ][ $key ]['explanation'] = $task['explanation'];
+					$cli_evaluation[ $key ]['id'] = $post_id;
+					$cli_evaluation[ $key ]['status'] = '-';
+					$cli_evaluation[ $key ]['label'] = $task['label'];
+					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
 				endif;
 				$key++;
 			}
 			\WP_CLI\Utils\format_items( $values['format'], $cli_evaluation, $fields );
+
 		}
 
 	}
 }
 
-WP_CLI::add_command( 'checklist', 'CLI_Command' );
+WP_CLI::add_command( 'checklist', 'Evaluate_Checklist_CLI_Command' );
