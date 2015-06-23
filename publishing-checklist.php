@@ -164,7 +164,7 @@ class Publishing_Checklist {
 	 */
 	public function action_manage_posts_custom_column( $column_name, $post_id ) {
 		if ( 'checklist' === $column_name ) {
-			$tasks_completed = $this->checklist_evaluate();
+			$tasks_completed = $this->evaluate_checklist( $post_id );
 			echo $this->get_template_part( 'column-checklist', array(
 				'tasks' => $tasks_completed['tasks'],
 				'completed_tasks' => $tasks_completed['completed'],
