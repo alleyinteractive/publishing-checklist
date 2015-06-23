@@ -1,24 +1,24 @@
 # Publishing Checklist #
-**Contributors:** fusionengineering, danielbachhuber, davisshaver  
-**Tags:** editorial, checklist, publishing, preflight
-**Requires at least:** 4.2  
-**Tested up to:** 4.2  
-**Stable tag:** 0.1.0  
-**License:** GPLv2 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+**Contributors:** fusionengineering, danielbachhuber, davisshaver    
+**Tags:** editorial, checklist, publishing, preflight  
+**Requires at least:** 4.2    
+**Tested up to:** 4.2    
+**Stable tag:** 0.1.0    
+**License:** GPLv2 or later    
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html    
 
 Publishing Checklist is a developer tool for adding pre-flight editorial checklists to WordPress posts.
 
-## Description ##
+## Description##
 
 Each time a user saves a post, Publishing Checklist validates that post type's list of tasks to make sure the content is ready for release. Tasks are validated with callbacks you supply when registering tasks.
 
-## Installation ##
+## Installation  ##
 It's a plugin! Install it like any other. 
 
 Once you've done so, you'll need to register the checklist items and callbacks for your site. Here's a simple example that checks for a featured image.
 
-### integrations/class-publishing-checklist.php
+### integrations/class-publishing-checklist.php ###
 ```php
 class Publishing_Checklist {
 
@@ -64,13 +64,19 @@ class Publishing_Checklist {
 
 }
 ```
-#### functions.php or similar ####
+### functions.php or similar ###
 ```php
 require_once dirname( __FILE__ ) . '/integrations/class-publishing-checklist.php';
 Publishing_Checklist::get_instance(); 
 
 ```
+## Frequently Asked Questions ##
+### Does the plugin come with any default checklists? ###
+
+Not yet.
 
 ## Screenshots ##
 
 ## Changelog ##
+### 0.1-alpha ###
+* Here's where we are now.
