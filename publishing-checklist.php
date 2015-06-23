@@ -10,6 +10,8 @@ Text Domain: publishing-checklist
 Domain Path: /languages
 */
 
+define( 'PUBLISHING_CHECKLIST_VERSION', '0.1-alpha' );
+
 class Publishing_Checklist {
 
 	private static $instance;
@@ -125,8 +127,8 @@ class Publishing_Checklist {
 	 * Load our scripts and styles
 	 */
 	public function action_publishing_checklist_enqueue_scripts() {
-		wp_enqueue_style( 'publishing-checklist', plugins_url( 'assets/css/publishing-checklist.css', __FILE__ ) );
-		wp_enqueue_script( 'publishing-checklist', plugins_url( 'assets/js/src/publishing-checklist.js', __FILE__ ), array( 'jquery' ) );
+		wp_enqueue_style( 'publishing-checklist', plugins_url( 'assets/css/publishing-checklist.css', __FILE__ ), false, PUBLISHING_CHECKLIST_VERSION );
+		wp_enqueue_script( 'publishing-checklist', plugins_url( 'assets/js/src/publishing-checklist.js', __FILE__ ), array( 'jquery' ), PUBLISHING_CHECKLIST_VERSION );
 	}
 
 	/**
