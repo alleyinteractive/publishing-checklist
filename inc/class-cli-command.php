@@ -39,25 +39,26 @@ class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 
 			$checklist_data = Publishing_Checklist()->evaluate_checklist( $post_id );
 
-			if ( empty( $checklist_data ) && ( $values['format'] === 'summary' ) ) {
+			if ( empty( $checklist_data ) &&  'summary' === $values['format'] ) {
 				WP_CLI::error( sprintf( __( 'No checklist found for %d.', 'publishing-checklist' ), $post_id ) );;
 				break;
 			}
 
-			if ( $values['format'] === 'summary' ) {
+			if ( 'summary' === $values['format'] ) {
 				WP_CLI::success( sprintf( __( '%d of %d tasks complete for %d', 'publishing-checklist' ), count( $checklist_data['completed'] ), count( $checklist_data['tasks'] ), $post_id ) );
-			}
-			foreach ( $checklist_data['tasks'] as $id => $task ) {
-				$cli_evaluation[] = array(
-					'task_id'     => $id,
-					'post_id'     => $post_id,
-					'status'      => in_array( $id, $checklist_data['completed'] ) ? 'complete' : 'incomplete',
-					'label'       => $task['label'],
-					'explanation' => $task['explanation'],
-				);
+			} else {
+				foreach ( $checklist_data['tasks'] as $id => $task ) {
+					$cli_evaluation[] = array(
+						'task_id'     => $id,
+						'post_id'     => $post_id,
+						'status'      => in_array( $id, $checklist_data['completed'] ) ? 'complete' : 'incomplete',
+						'label'       => $task['label'],
+						'explanation' => $task['explanation'],
+					);
+				}
 			}
 		}
-		if ( $values['format'] !== 'summary' ){
+		if ( 'summary' !== $values['format'] ) {
 			\WP_CLI\Utils\format_items( $values['format'], $cli_evaluation, $fields );
 		}
 	}
