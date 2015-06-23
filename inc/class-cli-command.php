@@ -29,7 +29,7 @@ class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 
 		$fields = array(
 			'task_id',
-			'id',
+			'post_id',
 			'status',
 			'label',
 			'explanation',
@@ -50,13 +50,13 @@ class Evaluate_Checklist_CLI_Command extends WP_CLI_Command {
 			}
 			foreach ( $checklist_data['tasks'] as $id => $task ) {
 				if ( in_array( $id, $checklist_data['completed'] ) ) {
-					$cli_evaluation[ $key ]['id'] = $post_id;
+					$cli_evaluation[ $key ]['post_id'] = $post_id;
 					$cli_evaluation[ $key ]['task_id'] = $id;
 					$cli_evaluation[ $key ]['status'] = '+';
 					$cli_evaluation[ $key ]['label'] = $task['label'];
 					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
 				} else {
-					$cli_evaluation[ $key ]['id'] = $post_id;
+					$cli_evaluation[ $key ]['post_id'] = $post_id;
 					$cli_evaluation[ $key ]['task_id'] = $id;
 					$cli_evaluation[ $key ]['status'] = '-';
 					$cli_evaluation[ $key ]['label'] = $task['label'];
