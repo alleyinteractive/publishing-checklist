@@ -82,9 +82,9 @@ Not yet.
 
 == Screenshots ==
 
-1. Checklist summaries will be displayed within a column on the Manage post screen. manage.gif
+1. Checklist summaries will be displayed within a column on the Manage post screen. screenshot-1.gif
 
-2. Checklists will also be displayed within the Publish metabox on the Edit screen. edit.png
+2. Checklists will also be displayed within the Publish metabox on the Edit screen. screenshot-2.png
 
 
 == Changelog ==
