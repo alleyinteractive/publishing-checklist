@@ -73,7 +73,7 @@ Publishing_Checklist::get_instance();
 == Frequently Asked Questions ==
 = Where will the checklist appear? =
 
-On Manage and Edit screens.
+On Manage and Edit post screens.
 
 = Does the plugin come with any default checklists? =
 
