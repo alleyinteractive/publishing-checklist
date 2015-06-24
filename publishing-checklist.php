@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Publishing Checklist
-Version: 0.1.0
+Version: 0.1-alpha
 Description: Set and use pre-flight publishing checklists for your different post types.
 Author: Fusion Engineering
 Author URI: http://fusion.net/
@@ -9,6 +9,8 @@ Plugin URI: https://github.com/fusioneng/publishing-checklist
 Text Domain: publishing-checklist
 Domain Path: /languages
 */
+
+define( 'PUBLISHING_CHECKLIST_VERSION', '0.1-alpha' );
 
 class Publishing_Checklist {
 
@@ -91,17 +93,17 @@ class Publishing_Checklist {
 		$post_type = get_post_type( $post_id );
 
 		$completed_tasks = array();
-		foreach ( $this->tasks as $id => $task ) {
+		foreach ( $this->tasks as $task_id => $task ) {
 			if ( ! is_callable( $task['callback'] ) ) {
-				unset( $this->tasks[ $id ] );
+				unset( $this->tasks[ $task_id ] );
 			}
 
 			if ( ! empty( $task['post_type'] ) && ! in_array( $post_type, $task['post_type'] ) ) {
-				unset( $this->tasks[ $id ] );
+				unset( $this->tasks[ $task_id ] );
 			}
 
-			if ( call_user_func_array( $task['callback'], array( $post_id, $id ) ) ) {
-				$completed_tasks[] = $id;
+			if ( call_user_func_array( $task['callback'], array( $post_id, $task_id ) ) ) {
+				$completed_tasks[] = $task_id;
 			}
 		}
 
@@ -122,8 +124,8 @@ class Publishing_Checklist {
 	 * Load our scripts and styles
 	 */
 	public function action_publishing_checklist_enqueue_scripts() {
-		wp_enqueue_style( 'publishing-checklist', plugins_url( 'assets/css/publishing-checklist.css', __FILE__ ) );
-		wp_enqueue_script( 'publishing-checklist', plugins_url( 'assets/js/src/publishing-checklist.js', __FILE__ ), array( 'jquery' ) );
+		wp_enqueue_style( 'publishing-checklist', plugins_url( 'assets/css/publishing-checklist.css', __FILE__ ), false, PUBLISHING_CHECKLIST_VERSION );
+		wp_enqueue_script( 'publishing-checklist', plugins_url( 'assets/js/src/publishing-checklist.js', __FILE__ ), array( 'jquery' ), PUBLISHING_CHECKLIST_VERSION );
 	}
 
 	/**

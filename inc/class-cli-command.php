@@ -2,6 +2,9 @@
 
 namespace Publishing_Checklist;
 
+use WP_CLI;
+use WP_CLI_Command;
+
 /**
 * CLI interface to the Publishing Checklist.
  */
@@ -16,7 +19,7 @@ class CLI_Command extends WP_CLI_Command {
 	 * : The ID of one or more posts
 	 *
 	 * [--format=<format>]
-	 * : Accepted values: table, json, csv. Default: table
+	 * : Accepted values: table, json, csv, summary. Default: table
 	 *
 	 * ## EXAMPLES
 	 *
@@ -30,38 +33,40 @@ class CLI_Command extends WP_CLI_Command {
 		$values = wp_parse_args( $assoc_args, $defaults );
 
 		$fields = array(
+			'task_id',
+			'post_id',
 			'status',
 			'label',
 			'explanation',
 		);
-		foreach ( $args as $id ) {
-			$checklist_data = Publishing_Checklist()->evaluate_checklist( $id );
+		$cli_evaluation = array();
+		foreach ( $args as $post_id ) {
 
-			if ( empty( $checklist_data ) ) {
-				WP_CLI::error( sprintf( __( 'No checklist found for %d.', 'publishing-checklist' ), $id ) );;
+			$checklist_data = Publishing_Checklist()->evaluate_checklist( $post_id );
+
+			if ( empty( $checklist_data ) &&  'summary' === $values['format'] ) {
+				WP_CLI::warning( sprintf( __( 'No checklist found for %d.', 'publishing-checklist' ), $post_id ) );;
 				break;
 			}
 
-			WP_CLI::success( sprintf( __( '%d of %d tasks complete for %d', 'publishing-checklist' ), count( $checklist_data['completed'] ), count( $checklist_data['tasks'] ), $id ) );
-
-			$key = $id;
-			$cli_evaluation = array();
-			foreach ( $checklist_data['tasks'] as $id => $task ) {
-				if ( in_array( $id, $checklist_data['completed'] ) ) :
-					$cli_evaluation[ $key ]['status'] = '+';
-					$cli_evaluation[ $key ]['label'] = $task['label'];
-					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
-				else :
-					$cli_evaluation[ $key ]['status'] = '-';
-					$cli_evaluation[ $key ]['label'] = $task['label'];
-					$cli_evaluation[ $key ]['explanation'] = $task['explanation'];
-				endif;
-				$key++;
+			if ( 'summary' === $values['format'] ) {
+				WP_CLI::success( sprintf( __( '%d of %d tasks complete for %d', 'publishing-checklist' ), count( $checklist_data['completed'] ), count( $checklist_data['tasks'] ), $post_id ) );
+			} else {
+				foreach ( $checklist_data['tasks'] as $id => $task ) {
+					$cli_evaluation[] = array(
+						'task_id'     => $id,
+						'post_id'     => $post_id,
+						'status'      => in_array( $id, $checklist_data['completed'] ) ? 'complete' : 'incomplete',
+						'label'       => $task['label'],
+						'explanation' => $task['explanation'],
+					);
+				}
 			}
+		}
+		if ( 'summary' !== $values['format'] ) {
 			\WP_CLI\Utils\format_items( $values['format'], $cli_evaluation, $fields );
 		}
-
 	}
 }
 
-WP_CLI::add_command( 'checklist', 'Publishing_Checklist\CLI_Command' );
+WP_CLI::add_command( 'publishing-checklist', 'Publishing_Checklist\CLI_Command' );
