@@ -79,7 +79,12 @@ On Manage and Edit post screens.
 
 Not yet.
 
+
 == Screenshots ==
+
+1. Checklist summaries will be displayed within a column on the Manage post screen. manage.gif
+
+2. Checklists will also be displayed within the Publish metabox on the Edit screen. edit.png
 
 
 == Changelog ==

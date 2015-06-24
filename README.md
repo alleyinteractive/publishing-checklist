@@ -79,7 +79,16 @@ On Manage and Edit post screens.
 
 Not yet.
 
+
 ## Screenshots ##
+
+### 1. Checklist summaries will be displayed within a column on the Manage post screen. manage.gif ###
+![Checklist summaries will be displayed within a column on the Manage post screen. manage.gif](http://s.wordpress.org/extend/plugins/publishing-checklist/screenshot-1.png)
+
+
+### 2. Checklists will also be displayed within the Publish metabox on the Edit screen. edit.png ###
+![Checklists will also be displayed within the Publish metabox on the Edit screen. edit.png](http://s.wordpress.org/extend/plugins/publishing-checklist/screenshot-2.png)
+
 
 
 ## Changelog ##
