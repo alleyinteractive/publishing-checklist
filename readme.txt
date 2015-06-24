@@ -3,7 +3,7 @@ Contributors: fusionengineering, danielbachhuber, davisshaver
 Tags: editorial, checklist, publishing, preflight
 Requires at least: 4.2  
 Tested up to: 4.2  
-Stable tag: 0.0.0  
+Stable tag: 0.1.0 
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -71,12 +71,18 @@ Publishing_Checklist::get_instance();
 
 ```
 == Frequently Asked Questions ==
+= Where will the checklist appear? =
+
+On Manage and Edit screens.
+
 = Does the plugin come with any default checklists? =
 
 Not yet.
 
 == Screenshots ==
 
+
 == Changelog ==
-= 0.1-alpha =
-* Here's where we are now.
+= 0.1.0 (June 25, 2015) =
+
+* Initial release.
