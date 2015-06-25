@@ -82,13 +82,12 @@ Not yet.
 
 ## Screenshots ##
 
-### 1. Checklist summaries will be displayed within a column on the Manage post screen. screenshot-1.png ###
-![Checklist summaries will be displayed within a column on the Manage post screen. screenshot-1.png](http://s.wordpress.org/extend/plugins/publishing-checklist/screenshot-1.png)
+### 1. Checklist summaries will be displayed within a column on the Manage post screen. ###
+![Checklist summaries will be displayed within a column on the Manage post screen.](http://s.wordpress.org/extend/plugins/publishing-checklist/screenshot-1.png)
 
 
-### 2. Checklists will also be displayed within the Publish metabox on the Edit screen. screenshot-2.png ###
-![Checklists will also be displayed within the Publish metabox on the Edit screen. screenshot-2.png](http://s.wordpress.org/extend/plugins/publishing-checklist/screenshot-2.png)
-
+### 2. Checklists will also be displayed within the Publish metabox on the Edit screen. ###
+![Checklists will also be displayed within the Publish metabox on the Edit screen.](http://s.wordpress.org/extend/plugins/publishing-checklist/screenshot-2.png)
 
 
 ## Changelog ##
