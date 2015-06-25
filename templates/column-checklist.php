@@ -1,11 +1,9 @@
-<div class="misc-pub-section publishing-checklist">
-	<h4><?php esc_html_e( 'Publishing Checklist', 'publishing-checklist' ); ?></h4>
-
+<div class="publishing-checklist-column">
 	<div class="publishing-checklist-items-complete">
 		<?php echo esc_html( sprintf( __( '%d of %d tasks complete', 'publishing-checklist' ), count( $completed_tasks ), count( $tasks ) ) ); ?>
 		<progress value="<?php echo (int) count( $completed_tasks ); ?>" max="<?php echo (int) count( $tasks ); ?>"></progress>
 	</div>
-	<a href="javascript:void(0);" class="publishing-checklist-show-list"><?php esc_html_e( 'Show List', 'publishing-checklist' ); ?></a>
+	<a href="javascript:void(0);" class="publishing-checklist-show-list row-actions"><?php esc_html_e( 'Show List', 'publishing-checklist' ); ?></a>
 
 	<div class="publishing-checklist-items" style="display:none;">
 		<ul>
@@ -21,4 +19,5 @@
 		</ul>
 	</div>
 	<a href="javascript:void(0);" class="publishing-checklist-hide-list" style="display:none;"><?php esc_html_e( 'Hide List', 'publishing-checklist' ); ?></a>
+
 </div>

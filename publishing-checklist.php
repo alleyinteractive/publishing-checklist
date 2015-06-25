@@ -37,6 +37,8 @@ class Publishing_Checklist {
 	private function setup_actions() {
 		add_action( 'publishing_checklist_enqueue_scripts', array( $this, 'action_publishing_checklist_enqueue_scripts' ) );
 		add_action( 'post_submitbox_misc_actions', array( $this, 'action_post_submitbox_misc_actions_render_checklist' ) );
+		add_action( 'manage_posts_custom_column', array( $this, 'action_manage_posts_custom_column' ), 10, 2 );
+		add_filter( 'manage_posts_columns', array( $this, 'filter_manage_posts_columns' ), 99 );
 	}
 
 	/**
@@ -155,6 +157,42 @@ class Publishing_Checklist {
 		return ob_get_clean();
 	}
 
+	/**
+	 * Customize columns on the "Manage Posts" views
+	 */
+	public function filter_manage_posts_columns( $columns ) {
+
+		foreach( $this->tasks as $task_id => $task ) {
+			if ( ! is_callable( $task['callback'] ) ) {
+				unset( $this->tasks[ $task_id ] );
+			}
+
+			if ( ! empty( $task['post_type'] ) && ! in_array( get_post_type(), $task['post_type'] ) ) {
+				unset( $this->tasks[ $task_id ] );
+			}
+		}
+
+		if ( empty( $this->tasks ) ) {
+			return $columns;
+		}
+
+		$columns['publishing_checklist'] = esc_html__( 'Publishing Checklist', 'publishing-checklist' );
+		do_action( 'publishing_checklist_enqueue_scripts' );
+		return $columns;
+	}
+
+	/**
+	 * Handle the output for a custom column
+	 */
+	public function action_manage_posts_custom_column( $column_name, $post_id ) {
+		if ( 'publishing_checklist' === $column_name ) {
+			$tasks_completed = $this->evaluate_checklist( $post_id );
+			echo $this->get_template_part( 'column-checklist', array(
+				'tasks' => $tasks_completed['tasks'],
+				'completed_tasks' => $tasks_completed['completed'],
+			) );
+		}
+	}
 }
 
 /**
