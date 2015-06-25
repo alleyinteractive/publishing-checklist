@@ -62,7 +62,7 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 			)
 		);
 		ob_start();
-		Publishing_Checklist()->action_manage_posts_custom_column( 'checklist', $post_id );
+		Publishing_Checklist()->action_manage_posts_custom_column( 'publishing_checklist', $post_id );
 		$output = ob_get_clean();
 		$this->assertContains( '1 of 1 tasks complete', $output );
 	}
@@ -74,7 +74,7 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 			)
 		);
 		$columns = Publishing_Checklist()->filter_manage_posts_columns( $this->columns );
-		$this->assertTrue( 'Checklist' === $columns['publishing_checklist'] );
+		$this->assertTrue( 'Publishing Checklist' === $columns['publishing_checklist'] );
 	}
 
 }
