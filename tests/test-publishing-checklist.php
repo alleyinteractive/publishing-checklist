@@ -14,6 +14,14 @@ Fusce tincidunt finibus mi vel porta.
 
 Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent at leo eu quam ullamcorper fermentum vel nec lorem. Praesent maximus aliquam felis. Suspendisse ac nisl velit. Aliquam non mattis magna, quis elementum elit. Etiam nulla augue, suscipit malesuada sollicitudin vitae, malesuada vitae risus. Sed diam eros, bibendum in condimentum ac, porta ullamcorper lorem. Praesent in dignissim ante, non auctor est. Quisque placerat.';
 
+	private $columns = array(
+		'cb' => '<input type="checkbox" />',
+		'title' => 'Title',
+		'coauthors' => 'Authors',
+		'comments' => '<span class="vers comment-grey-bubble" title="Comments"><span class="screen-reader-text">Comments</span></span>',
+		'date' => 'Date',
+	);
+
 	function setUp() {
 		parent::setUp();
 
@@ -45,6 +53,28 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 		$this->assertContains( 'Word Count', $evaluated['tasks']['test-publishing-checklist-word-count']['label'] );
 		$this->assertContains( 'Posts should be at least 200 words.', $evaluated['tasks']['test-publishing-checklist-word-count']['explanation'] );
 		$this->assertContains( 'test-publishing-checklist-word-count', $evaluated['completed'] );
+	}
+
+	public function test_checklist_column_output_action() {
+		$post_id = $this->factory->post->create(
+			array(
+				'post_content' => $this->long_test,
+			)
+		);
+		ob_start();
+		Publishing_Checklist()->action_manage_posts_custom_column( 'publishing_checklist', $post_id );
+		$output = ob_get_clean();
+		$this->assertContains( '1 of 1 tasks complete', $output );
+	}
+
+	public function test_checklist_column_addition() {
+		$post_id = $this->factory->post->create(
+			array(
+				'post_content' => $this->long_test,
+			)
+		);
+		$columns = Publishing_Checklist()->filter_manage_posts_columns( $this->columns );
+		$this->assertTrue( 'Publishing Checklist' === $columns['publishing_checklist'] );
 	}
 
 }
