@@ -22,7 +22,12 @@ class Publishing_Checklist {
 			self::$instance = new Publishing_Checklist;
 			self::$instance->setup_actions();
 			do_action( 'publishing_checklist_init' );
+
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				require_once dirname( __FILE__ ) . '/inc/class-cli-command.php';
+			}
 		}
+
 		return self::$instance;
 	}
 
@@ -165,7 +170,7 @@ class Publishing_Checklist {
 	 * Handle the output for a custom column
 	 */
 	public function action_manage_posts_custom_column( $column_name, $post_id ) {
-		if ( 'checklist' === $column_name ) {
+		if ( 'publishing_checklist' === $column_name ) {
 			$tasks_completed = $this->evaluate_checklist( $post_id );
 			echo $this->get_template_part( 'column-checklist', array(
 				'tasks' => $tasks_completed['tasks'],
