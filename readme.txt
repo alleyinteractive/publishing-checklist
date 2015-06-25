@@ -3,7 +3,7 @@ Contributors: fusionengineering, danielbachhuber, davisshaver
 Tags: editorial, checklist, publishing, preflight
 Requires at least: 4.2  
 Tested up to: 4.2  
-Stable tag: 0.1.0 
+Stable tag: 0.0.0
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -88,6 +88,7 @@ Not yet.
 
 
 == Changelog ==
-= 0.1.0 (June 25, 2015) =
+
+= 0.1.0 (????) =
 
 * Initial release.
