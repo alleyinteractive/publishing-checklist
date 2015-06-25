@@ -3,7 +3,7 @@
 **Tags:** editorial, checklist, publishing, preflight  
 **Requires at least:** 4.2    
 **Tested up to:** 4.2    
-**Stable tag:** 0.0.0    
+**Stable tag:** 0.0.0  
 **License:** GPLv2 or later    
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html    
 
@@ -71,12 +71,27 @@ Publishing_Checklist::get_instance();
 
 ```
 ## Frequently Asked Questions ##
+### Where will the checklist appear? ###
+
+On Manage and Edit post screens.
+
 ### Does the plugin come with any default checklists? ###
 
 Not yet.
 
+
 ## Screenshots ##
 
+### 1. Checklist summaries will be displayed within a column on the Manage post screen. ###
+![Checklist summaries will be displayed within a column on the Manage post screen.](http://s.wordpress.org/extend/plugins/publishing-checklist/screenshot-1.png)
+
+
+### 2. Checklists will also be displayed within the Publish metabox on the Edit screen. ###
+![Checklists will also be displayed within the Publish metabox on the Edit screen.](http://s.wordpress.org/extend/plugins/publishing-checklist/screenshot-2.png)
+
+
 ## Changelog ##
-### 0.1-alpha ###
-* Here's where we are now.
+
+### 0.1.0 (????) ###
+
+* Initial release.

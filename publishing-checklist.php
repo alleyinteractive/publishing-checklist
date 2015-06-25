@@ -162,7 +162,7 @@ class Publishing_Checklist {
 	 */
 	public function filter_manage_posts_columns( $columns ) {
 
-		foreach( $this->tasks as $task_id => $task ) {
+		foreach ( $this->tasks as $task_id => $task ) {
 			if ( ! is_callable( $task['callback'] ) ) {
 				unset( $this->tasks[ $task_id ] );
 			}
