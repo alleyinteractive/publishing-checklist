@@ -13,7 +13,7 @@
 		display: block;
 	}
 }
-.column-checklist {
+.column-publishing_checklist {
 	@media screen and (max-width: 782px) {
 		display: none;
 	}
@@ -27,5 +27,9 @@
 	}
 	progress {
 		display: block;
+		max-width: 100%;
+	}
+	a.publishing-checklist-show-list.row-actions {
+		color: #0073aa !important;
 	}
 }

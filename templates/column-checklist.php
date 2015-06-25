@@ -3,7 +3,7 @@
 		<?php echo esc_html( sprintf( __( '%d of %d tasks complete', 'publishing-checklist' ), count( $completed_tasks ), count( $tasks ) ) ); ?>
 		<progress value="<?php echo (int) count( $completed_tasks ); ?>" max="<?php echo (int) count( $tasks ); ?>"></progress>
 	</div>
-	<a href="javascript:void(0);" class="publishing-checklist-show-list"><?php esc_html_e( 'Show List', 'publishing-checklist' ); ?></a>
+	<a href="javascript:void(0);" class="publishing-checklist-show-list row-actions"><?php esc_html_e( 'Show List', 'publishing-checklist' ); ?></a>
 
 	<div class="publishing-checklist-items" style="display:none;">
 		<ul>

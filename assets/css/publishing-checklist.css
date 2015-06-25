@@ -11,13 +11,16 @@
     display: block; }
 
 @media screen and (max-width: 782px) {
-  .column-checklist {
+  .column-publishing_checklist {
     display: none; } }
-.column-checklist h4 {
+.column-publishing_checklist h4 {
   margin-top: 0;
   margin-bottom: 5px; }
-.column-checklist .publishing-checklist-items-complete {
+.column-publishing_checklist .publishing-checklist-items-complete {
   font-style: italic;
   margin-bottom: 5px; }
-.column-checklist progress {
-  display: block; }
+.column-publishing_checklist progress {
+  display: block;
+  max-width: 100%; }
+.column-publishing_checklist a.publishing-checklist-show-list.row-actions {
+  color: #0073aa !important; }
