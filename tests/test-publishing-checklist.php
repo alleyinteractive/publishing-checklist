@@ -56,11 +56,13 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 	}
 
 	public function test_checklist_column_output_action() {
+		global $post;
 		$post_id = $this->factory->post->create(
 			array(
 				'post_content' => $this->long_test,
 			)
 		);
+		$post = get_post( $post_id );
 		ob_start();
 		Publishing_Checklist()->action_manage_posts_custom_column( 'publishing_checklist', $post_id );
 		$output = ob_get_clean();
@@ -68,11 +70,13 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 	}
 
 	public function test_checklist_column_addition() {
+		global $post;
 		$post_id = $this->factory->post->create(
 			array(
 				'post_content' => $this->long_test,
 			)
 		);
+		$post = get_post( $post_id );
 		$columns = Publishing_Checklist()->filter_manage_posts_columns( $this->columns );
 		$this->assertTrue( 'Publishing Checklist' === $columns['publishing_checklist'] );
 	}
