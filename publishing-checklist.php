@@ -156,7 +156,7 @@ class Publishing_Checklist {
 	 * Customize columns on the "Manage Posts" views
 	 */
 	public function filter_manage_posts_columns( $columns ) {
-		$columns['checklist'] = esc_html__( 'Checklist', 'fusion', 'publishing-checklist' );
+		$columns['publishing_checklist'] = esc_html__( 'Publishing Checklist', 'publishing-checklist' );
 		do_action( 'publishing_checklist_enqueue_scripts' );
 		return $columns;
 	}

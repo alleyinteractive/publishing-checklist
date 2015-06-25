@@ -74,7 +74,7 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 			)
 		);
 		$columns = Publishing_Checklist()->filter_manage_posts_columns( $this->columns );
-		$this->assertTrue( 'Checklist' === $columns['checklist'] );
+		$this->assertTrue( 'Checklist' === $columns['publishing_checklist'] );
 	}
 
 }
