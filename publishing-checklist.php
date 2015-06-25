@@ -162,13 +162,12 @@ class Publishing_Checklist {
 	 */
 	public function filter_manage_posts_columns( $columns ) {
 
-		$screen = get_current_screen();
 		foreach( $this->tasks as $task_id => $task ) {
 			if ( ! is_callable( $task['callback'] ) ) {
 				unset( $this->tasks[ $task_id ] );
 			}
 
-			if ( ! empty( $task['post_type'] ) && ! in_array( $screen->post_type, $task['post_type'] ) ) {
+			if ( ! empty( $task['post_type'] ) && ! in_array( get_post_type(), $task['post_type'] ) ) {
 				unset( $this->tasks[ $task_id ] );
 			}
 		}
