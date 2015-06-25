@@ -161,6 +161,22 @@ class Publishing_Checklist {
 	 * Customize columns on the "Manage Posts" views
 	 */
 	public function filter_manage_posts_columns( $columns ) {
+
+		$screen = get_current_screen();
+		foreach( $this->tasks as $task_id => $task ) {
+			if ( ! is_callable( $task['callback'] ) ) {
+				unset( $this->tasks[ $task_id ] );
+			}
+
+			if ( ! empty( $task['post_type'] ) && ! in_array( $screen->post_type, $task['post_type'] ) ) {
+				unset( $this->tasks[ $task_id ] );
+			}
+		}
+
+		if ( empty( $this->tasks ) ) {
+			return $columns;
+		}
+
 		$columns['publishing_checklist'] = esc_html__( 'Publishing Checklist', 'publishing-checklist' );
 		do_action( 'publishing_checklist_enqueue_scripts' );
 		return $columns;
