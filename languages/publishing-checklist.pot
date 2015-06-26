@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Publishing Checklist 0.1-alpha\n"
 "Report-Msgid-Bugs-To: "
 "http://wordpress.org/support/plugin/publishing-checklist\n"
-"POT-Creation-Date: 2015-06-09 22:02:02+00:00\n"
+"POT-Creation-Date: 2015-06-26 17:35:09+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,28 +25,45 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
+#: inc/class-cli-command.php:48
+msgid "No checklist found for %d."
+msgstr ""
+
+#: inc/class-cli-command.php:53
+msgid "%d of %d tasks complete for %d"
+msgstr ""
+
 #. Plugin Name of the plugin/theme
 msgid "Publishing Checklist"
 msgstr ""
 
-#: templates/post-submitbox-misc-actions.php:5
+#: templates/column-checklist.php:3 templates/post-submitbox-misc-actions.php:5
 msgid "%d of %d tasks complete"
 msgstr ""
 
-#: templates/post-submitbox-misc-actions.php:7
+#: templates/column-checklist.php:6 templates/post-submitbox-misc-actions.php:8
 msgid "Show List"
 msgstr ""
 
-#: templates/post-submitbox-misc-actions.php:22
+#: templates/column-checklist.php:21
+#: templates/post-submitbox-misc-actions.php:23
 msgid "Hide List"
 msgstr ""
 
+#: tests/test-publishing-checklist.php:30
+msgid "Word Count"
+msgstr ""
+
+#: tests/test-publishing-checklist.php:32
+msgid "Posts should be at least 200 words."
+msgstr ""
+
 #. Plugin URI of the plugin/theme
-msgid "PLUGIN SITE HERE"
+msgid "https://github.com/fusioneng/publishing-checklist"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "PLUGIN DESCRIPTION HERE"
+msgid "Set and use pre-flight publishing checklists for your different post types."
 msgstr ""
 
 #. Author of the plugin/theme

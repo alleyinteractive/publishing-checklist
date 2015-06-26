@@ -27,9 +27,9 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 
 		self::$instance = new Publishing_Checklist;
 		$args = array(
-			'label'           => esc_html__( 'Word Count', 'test-publishing-checklist' ),
+			'label'           => esc_html__( 'Word Count', 'publishing-checklist' ),
 			'callback'        => 'ensure_minimum_200_words',
-			'explanation'     => esc_html__( 'Posts should be at least 200 words.', 'fusion' ),
+			'explanation'     => esc_html__( 'Posts should be at least 200 words.', 'publishing-checklist' ),
 			'post_type'       => array( 'post' ),
 		);
 		Publishing_Checklist()->register_task( 'test-publishing-checklist-word-count', $args );
