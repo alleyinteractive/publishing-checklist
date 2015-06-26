@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Publishing Checklist
-Version: 0.1-alpha
-Description: Set and use pre-flight publishing checklists for your different post types.
+Version: 0.1.0
+Description: Pre-flight your posts.
 Author: Fusion Engineering
 Author URI: http://fusion.net/
 Plugin URI: https://github.com/fusioneng/publishing-checklist
@@ -10,7 +10,7 @@ Text Domain: publishing-checklist
 Domain Path: /languages
 */
 
-define( 'PUBLISHING_CHECKLIST_VERSION', '0.1-alpha' );
+define( 'PUBLISHING_CHECKLIST_VERSION', '0.1.0' );
 
 class Publishing_Checklist {
 
