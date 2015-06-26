@@ -4,9 +4,9 @@
 
 	$('#the-list').on('click', '.publishing-checklist-hide-list', hideChecklist );
 
-	$('.publishing-checklist').on('click', '.publishing-checklist-show-list', showChecklist );
+	$('.misc-pub-section').on('click', '.publishing-checklist-show-list', showChecklist );
 
-	$('.publishing-checklist').on('click', '.publishing-checklist-hide-list', hideChecklist );
+	$('.misc-pub-section').on('click', '.publishing-checklist-hide-list', hideChecklist );
 
 	function showChecklist(event) {
 		$( '.publishing-checklist-items', $(this).parent() ).show();
