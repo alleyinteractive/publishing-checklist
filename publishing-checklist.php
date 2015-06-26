@@ -2,7 +2,7 @@
 /*
 Plugin Name: Publishing Checklist
 Version: 0.1-alpha
-Description: Set and use pre-flight publishing checklists for your different post types.
+Description: Pre-flight your posts.
 Author: Fusion Engineering
 Author URI: http://fusion.net/
 Plugin URI: https://github.com/fusioneng/publishing-checklist

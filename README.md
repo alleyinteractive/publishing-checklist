@@ -7,11 +7,11 @@
 **License:** GPLv2 or later    
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html   
 
-Publishing Checklist is a developer tool for adding pre-flight editorial checklists to WordPress posts.
+Pre-flight your posts.
 
 ## Description##
 
-Each time a user saves a post, Publishing Checklist validates that post type's list of tasks to make sure the content is ready for release. Tasks are validated with callbacks you supply when registering tasks.
+Publishing Checklist is a developer tool for adding pre-flight editorial checklists to WordPress posts. Each time a user saves a post, Publishing Checklist validates that post type's list of tasks to make sure the content is ready for release. Tasks are validated with callbacks you supply when registering tasks.
 
 ## Installation  ##
 

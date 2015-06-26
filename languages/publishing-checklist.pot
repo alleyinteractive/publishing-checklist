@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Publishing Checklist 0.1-alpha\n"
 "Report-Msgid-Bugs-To: "
 "http://wordpress.org/support/plugin/publishing-checklist\n"
-"POT-Creation-Date: 2015-06-26 17:35:09+00:00\n"
+"POT-Creation-Date: 2015-06-26 19:39:10+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -63,7 +63,7 @@ msgid "https://github.com/fusioneng/publishing-checklist"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "Set and use pre-flight publishing checklists for your different post types."
+msgid "Pre-flight your posts."
 msgstr ""
 
 #. Author of the plugin/theme
