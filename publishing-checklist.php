@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Publishing Checklist
-Version: 0.1.0
+Version: 0.2.0-alpha
 Description: Pre-flight your posts.
 Author: Fusion Engineering
 Author URI: http://fusion.net/
@@ -10,7 +10,7 @@ Text Domain: publishing-checklist
 Domain Path: /languages
 */
 
-define( 'PUBLISHING_CHECKLIST_VERSION', '0.1.0' );
+define( 'PUBLISHING_CHECKLIST_VERSION', '0.2.0-alpha' );
 
 class Publishing_Checklist {
 
