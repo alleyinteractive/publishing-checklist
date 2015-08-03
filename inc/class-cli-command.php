@@ -39,7 +39,7 @@ class CLI_Command extends WP_CLI_Command {
 				'status',
 				'label',
 				'explanation',
-			)
+			),
 		);
 		$values = wp_parse_args( $assoc_args, $defaults );
 
