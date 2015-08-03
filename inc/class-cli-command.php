@@ -42,13 +42,6 @@ class CLI_Command extends WP_CLI_Command {
 		);
 		$values = wp_parse_args( $assoc_args, $defaults );
 
-		$fields = array(
-			'task_id',
-			'post_id',
-			'status',
-			'label',
-			'explanation',
-		);
 		$cli_evaluation = array();
 		foreach ( $args as $post_id ) {
 
