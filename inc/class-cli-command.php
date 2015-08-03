@@ -35,6 +35,7 @@ class CLI_Command extends WP_CLI_Command {
 			'fields'      => array(
 				'task_id',
 				'post_id',
+				'post_title',
 				'status',
 				'label',
 				'explanation',
@@ -59,7 +60,7 @@ class CLI_Command extends WP_CLI_Command {
 					$cli_evaluation[] = array(
 						'task_id'     => $id,
 						'post_id'     => $post_id,
-						'post_title'  => get_the_title( $id ),
+						'post_title'  => htmlspecialchars_decode( html_entity_decode( get_the_title( $post_id ) ), ENT_QUOTES ),
 						'status'      => in_array( $id, $checklist_data['completed'] ) ? 'complete' : 'incomplete',
 						'label'       => $task['label'],
 						'explanation' => $task['explanation'],
