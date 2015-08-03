@@ -18,6 +18,9 @@ class CLI_Command extends WP_CLI_Command {
 	 * <id>...
 	 * : The ID of one or more posts
 	 *
+	 * [--fields=<fields>]
+	 * : Limit the output to specific row fields. Defaults to task_id, post_id, status, label, explanation.
+	 *
 	 * [--format=<format>]
 	 * : Accepted values: table, json, csv, summary. Default: table
 	 *
@@ -28,7 +31,14 @@ class CLI_Command extends WP_CLI_Command {
 	 */
 	public function evaluate( $args = array(), $assoc_args = array() ) {
 		$defaults = array(
-			'format' => 'table',
+			'format'      => 'table',
+			'fields'      => array(
+				'task_id',
+				'post_id',
+				'status',
+				'label',
+				'explanation',
+			)
 		);
 		$values = wp_parse_args( $assoc_args, $defaults );
 
@@ -56,6 +66,7 @@ class CLI_Command extends WP_CLI_Command {
 					$cli_evaluation[] = array(
 						'task_id'     => $id,
 						'post_id'     => $post_id,
+						'post_title'  => get_the_title( $id ),
 						'status'      => in_array( $id, $checklist_data['completed'] ) ? 'complete' : 'incomplete',
 						'label'       => $task['label'],
 						'explanation' => $task['explanation'],
@@ -64,7 +75,7 @@ class CLI_Command extends WP_CLI_Command {
 			}
 		}
 		if ( 'summary' !== $values['format'] ) {
-			\WP_CLI\Utils\format_items( $values['format'], $cli_evaluation, $fields );
+			\WP_CLI\Utils\format_items( $values['format'], $cli_evaluation, $values['fields'] );
 		}
 	}
 }
