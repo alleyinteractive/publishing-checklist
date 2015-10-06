@@ -9,6 +9,8 @@
     margin-bottom: 5px; }
   .misc-pub-section.publishing-checklist progress {
     display: block; }
+  .misc-pub-section.publishing-checklist li {
+    cursor: help; }
 
 @media screen and (max-width: 782px) {
   .column-publishing_checklist {

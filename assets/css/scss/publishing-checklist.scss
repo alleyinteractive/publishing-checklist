@@ -12,6 +12,9 @@
 	progress {
 		display: block;
 	}
+	li {
+		cursor: help;
+	}
 }
 .column-publishing_checklist {
 	@media screen and (max-width: 782px) {
