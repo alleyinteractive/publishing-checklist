@@ -69,7 +69,7 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 		$evaluated = Publishing_Checklist()->evaluate_checklist( $post_id );
 
 		$this->assertEquals( 1, count( $evaluated['tasks'] ) );
-		$this->assertTrue( in_array( 'test-pass-page', $evaluated['completed'] ) );
+		$this->assertTrue( in_array( 'test-pass-page', $evaluated['completed'], true ) );
 
 	}
 
