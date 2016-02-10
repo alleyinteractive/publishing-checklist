@@ -103,7 +103,7 @@ class Publishing_Checklist {
 				unset( $this->tasks[ $task_id ] );
 			}
 
-			if ( ! empty( $task['post_type'] ) && ! in_array( $post_type, $task['post_type'] ) ) {
+			if ( ! empty( $task['post_type'] ) && ! in_array( $post_type, $task['post_type'], true ) ) {
 				unset( $this->tasks[ $task_id ] );
 			}
 
@@ -167,7 +167,7 @@ class Publishing_Checklist {
 				unset( $this->tasks[ $task_id ] );
 			}
 
-			if ( ! empty( $task['post_type'] ) && ! in_array( get_post_type(), $task['post_type'] ) ) {
+			if ( ! empty( $task['post_type'] ) && ! in_array( get_post_type(), $task['post_type'], true ) ) {
 				unset( $this->tasks[ $task_id ] );
 			}
 		}

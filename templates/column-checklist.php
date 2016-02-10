@@ -9,7 +9,7 @@
 		<ul>
 			<?php foreach ( $tasks as $id => $task ) : ?>
 				<li title="<?php echo esc_attr( $task['explanation'] ); ?>">
-				<?php if ( in_array( $id, $completed_tasks ) ) : ?>
+				<?php if ( in_array( $id, $completed_tasks, true ) ) : ?>
 					<span class="dashicons dashicons-yes"></span>
 				<?php else : ?>
 					<span class="dashicons dashicons-no-alt"></span>

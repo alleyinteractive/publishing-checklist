@@ -61,7 +61,7 @@ class CLI_Command extends WP_CLI_Command {
 						'task_id'     => $id,
 						'post_id'     => $post_id,
 						'post_title'  => htmlspecialchars_decode( html_entity_decode( get_the_title( $post_id ) ), ENT_QUOTES ),
-						'status'      => in_array( $id, $checklist_data['completed'] ) ? 'complete' : 'incomplete',
+						'status'      => in_array( $id, $checklist_data['completed'], true ) ? 'complete' : 'incomplete',
 						'label'       => $task['label'],
 						'explanation' => $task['explanation'],
 					);
