@@ -58,10 +58,6 @@ class Publishing_Checklist {
 
 	}
 
-	private function get_supported_post_types() {
-
-	}
-
 	/**
 	 * Register a validation task for our publishing checklist
 	 *
