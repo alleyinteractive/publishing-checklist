@@ -105,7 +105,7 @@ class Publishing_Checklist {
 				continue;
 			}
 
-			if ( empty( $task['post_type'] ) || ! in_array( get_post_type( $post_id ), $task['post_type'] ) ) {
+			if ( empty( $task['post_type'] ) || ! in_array( get_post_type( $post_id ), $task['post_type'], true ) ) {
 				continue;
 			}
 
