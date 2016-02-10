@@ -124,7 +124,7 @@ class Publishing_Checklist {
 		}
 
 		$checklist_data = array(
-			'tasks'     => $this->tasks,
+			'tasks'     => $tasks,
 			'completed' => $completed_tasks,
 		);
 
