@@ -40,22 +40,30 @@ class Publishing_Checklist {
 		add_action( 'post_submitbox_misc_actions', array( $this, 'action_post_submitbox_misc_actions_render_checklist' ) );
 
 		// Must be called before list table is rendered, but after all tasks have been registered.
-		add_action( 'admin_head', function() {
+		add_action( 'admin_head',          array( $this, 'register_custom_column_handlers' ) );
+		add_action( 'wp_ajax_inline-save', array( $this, 'register_custom_column_handlers' ), 1 );
+	}
 
-			// Find all post types with tasks associated.
-			$post_types = array();
-			foreach ( $this->tasks as $task ) {
-				$post_types = array_unique( array_merge( $post_types, $task['post_type'] ) );
-			}
+	/**
+	 * Register the Publishing Checklist column for list tables.
+	 *
+	 * Registers the Publishing Checklist column, and the custom column
+	 * rendering function, for all post types which have checklist tasks
+	 * defined.
+	 *
+	 */
+	public function register_custom_column_handlers() {
+		// Find all post types with tasks associated.
+		$post_types = array();
+		foreach ( $this->tasks as $task ) {
+			$post_types = array_unique( array_merge( $post_types, $task['post_type'] ) );
+		}
 
-			// Add post list table columns
-			foreach ( $post_types as $post_type ) {
-				add_action( "manage_{$post_type}_posts_custom_column", array( $this, 'action_manage_posts_custom_column' ), 10, 2 );
-				add_filter( "manage_{$post_type}_posts_columns", array( $this, 'filter_manage_posts_columns' ), 99 );
-			}
-
-		} );
-
+		// Add post list table columns
+		foreach ( $post_types as $post_type ) {
+			add_action( "manage_{$post_type}_posts_custom_column", array( $this, 'action_manage_posts_custom_column' ), 10, 2 );
+			add_filter( "manage_{$post_type}_posts_columns", array( $this, 'filter_manage_posts_columns' ), 99 );
+		}
 	}
 
 	/**
