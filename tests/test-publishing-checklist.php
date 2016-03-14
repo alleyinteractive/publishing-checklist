@@ -26,6 +26,7 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 		parent::setUp();
 
 		self::$instance = new Publishing_Checklist;
+
 		$args = array(
 			'label'           => esc_html__( 'Word Count', 'publishing-checklist' ),
 			'callback'        => 'ensure_minimum_200_words',
@@ -33,6 +34,7 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 			'post_type'       => array( 'post' ),
 		);
 		Publishing_Checklist()->register_task( 'test-publishing-checklist-word-count', $args );
+
 	}
 
 	public function test_incomplete_evaluate_checklist() {
@@ -53,6 +55,22 @@ Fusce tincidunt finibus mi vel porta. Cum sociis natoque penatibus et magnis dis
 		$this->assertContains( 'Word Count', $evaluated['tasks']['test-publishing-checklist-word-count']['label'] );
 		$this->assertContains( 'Posts should be at least 200 words.', $evaluated['tasks']['test-publishing-checklist-word-count']['explanation'] );
 		$this->assertContains( 'test-publishing-checklist-word-count', $evaluated['completed'] );
+	}
+
+	public function test_tasks_for_multiple_post_types() {
+
+		Publishing_Checklist()->register_task( 'test-pass-page', array(
+			'label'           => 'test',
+			'callback'        => '__return_true',
+			'post_type'       => array( 'page' ),
+		) );
+
+		$post_id = $this->factory->post->create( array( 'post_type' => 'page' ) );
+		$evaluated = Publishing_Checklist()->evaluate_checklist( $post_id );
+
+		$this->assertEquals( 1, count( $evaluated['tasks'] ) );
+		$this->assertTrue( in_array( 'test-pass-page', $evaluated['completed'], true ) );
+
 	}
 
 	public function test_checklist_column_output_action() {

@@ -120,29 +120,36 @@ class Publishing_Checklist {
 			return false;
 		}
 
-		$post_type = get_post_type( $post_id );
-
+		$tasks           = array();
 		$completed_tasks = array();
+
+		// Get all tasks to be run for this post_id.
 		foreach ( $this->tasks as $task_id => $task ) {
+
 			if ( ! is_callable( $task['callback'] ) ) {
-				unset( $this->tasks[ $task_id ] );
+				continue;
 			}
 
-			if ( ! empty( $task['post_type'] ) && ! in_array( $post_type, $task['post_type'], true ) ) {
-				unset( $this->tasks[ $task_id ] );
+			if ( empty( $task['post_type'] ) || ! in_array( get_post_type( $post_id ), $task['post_type'], true ) ) {
+				continue;
 			}
 
+			$tasks[ $task_id ] = $task;
+
+		}
+
+		if ( empty( $tasks ) ) {
+			return false;
+		}
+
+		foreach ( $tasks as $task_id => $task ) {
 			if ( call_user_func_array( $task['callback'], array( $post_id, $task_id ) ) ) {
 				$completed_tasks[] = $task_id;
 			}
 		}
 
-		if ( empty( $this->tasks ) ) {
-			return false;
-		}
-
 		$checklist_data = array(
-			'tasks' => $this->tasks,
+			'tasks'     => $tasks,
 			'completed' => $completed_tasks,
 		);
 
